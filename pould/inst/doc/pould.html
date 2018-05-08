@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Steven J. Mack, PhD – sjmack@chori.org" />
+
+
+<title>POULD: Phased Or Unphased Linkage Disequilibrium</title>
+
+
+
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">POULD: Phased Or Unphased Linkage Disequilibrium</h1>
+<h4 class="author"><em>Steven J. Mack, PhD – <a href="mailto:sjmack@chori.org">sjmack@chori.org</a></em></h4>
+<h4 class="date"><em>May 3, 2018</em></h4>
+
+
+
+<ul>
+<li>Package Version: 0.3.0.9000</li>
+</ul>
+<div id="overview" class="section level1">
+<h1>Overview</h1>
+<p>The <em>pould</em> package (pronounced “pooled”) calculates four linkage disequilibrium (LD) statistics – <em>D<sup>’</sup></em>, <em>W<sub>n</sub></em> and the conditional asymmetric LD (cALD) measures, <em>W<sub>A/B</sub></em> and <em>W<sub>B/A</sub></em> – for genotype data from pairs of genetic loci, and can treat these data as either phased or unphased for these calculations.</p>
+<p>The package includes a wrapper function that parses multi-locus HLA haplotypes in the <a href="http://ihiws.org">17th International HLA and Immunogenetics Workshop</a> (IHIW) Family Data Project’s HaplObserve output format. This wrapper function generates output files in the R working directory.</p>
+<p>For information about these LD measures, see:<br> Hedrick PW. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1203208/pdf/331.pdf">Genetics; 1987,117,331-41</a>.<br> Cramér H. <a href="https://archive.org/details/in.ernet.dli.2015.13917">Mathematical Models of Statistics</a>, 1946, Princeton University Press, Princeton NJ.<br> Thomson G, Single RM. <a href="https://doi.org/10.1534/genetics.114.165266">Genetics. 2014;198(1):321-31</a>.</p>
+<p><em>Pould</em> accepts genotype and haplotype data for <em>individual subects</em> as input data. To calculate the cALD measures using haplotype frequency data, try the <a href="https://cran.r-project.org/web/packages/asymLD/index.html"><em>asymLD</em></a> package. See: Single et al. <a href="https://doi.org/10.1016/j.humimm.2015.09.001">Hum Immunol. 2016;77(3):288-294</a> for more information.</p>
+<div id="functions-and-input-formats" class="section level2">
+<h2>Functions and Input Formats</h2>
+<div id="cald" class="section level3">
+<h3>cALD</h3>
+<p>The <em>cALD()</em> function calculates the LD measures from genotype data for pairs of loci. The <code>drb1.dqb1.demo</code> dataset, shown below, illustrates the input format. The function accepts a 4-column data frame or tab-delimited text file with data for the first locus in columns 1 and 2, and data for the second locus in columns 3 and 4.</p>
+<pre><code>&gt;drb1.dqb1.demo[1:6,]
+
+##    DRB1  DRB1  DQB1  DQB1
+## 1 15:01 07:01 06:02 03:03
+## 2 04:05 13:01 03:02 06:03
+## 3 04:01 13:02 03:02 06:09
+## 4 16:02 04:05 05:02 03:02
+## 5 15:01 07:01 06:02 02:02
+## 6 04:01 04:01 03:02 03:02</code></pre>
+<p>The locus names should be used as column headers, with one allele/variant in each column. Each row represents a single subject. The headers for columns 1 and 2 must be identical, as must the headers for columns 3 and 4. If phase is known, <em>cALD()</em> assumes that columns 1 and 3 represent one haplotype, and that columns 2 and 4 represent the second haplotype.</p>
+<p>While HLA data are shown above, <em>cALD()</em> can accept any genetic data. The example below combines data for HLA-DQA1 and rs7743506.</p>
+<pre><code>      HLA-DQA1       HLA-DQA1     rs7743506     rs7743506
+        02:01          01:02           C             C
+        04:01          01:02           A             C
+        04:01          05:01           A             C
+        01:01          01:02           C             C
+        04:01          01:01           A             C
+        05:01          01:02           C             C</code></pre>
+</div>
+<div id="ldwrap" class="section level3">
+<h3>LDWrap</h3>
+<p>The <em>LDWrap()</em> function parses HLA haplotype data generated as part of the 17th International HLA and Immunogenetic Workshop Family HLA Data Project. The function accepts a data frame or CSV formatted text file, and passes genotype data for all pairs of HLA loci in that dataset to <em>cALD()</em> for LD analysis.</p>
+<p>A minimal <em>LDWrap()</em> data file or data frame contains two columns named “Relation” and “Gl String”. Other columns are allowed, but are ignored. The <code>hla.hap.demo</code> dataset (shown below in edited form) illustrates the input format. Each row contains data for a single subject. The “Relation”&quot; column can contain any text string; however, values such as “mother”, “father” and “child” are standard for the Family HLA Data Project. <em>LDWrap()</em> will ignore all rows in which <code>Relation=child</code>; rows with any other value in the “Relation” column will be processed.</p>
+<pre><code>Relation    Gl String
+Subject HLA-A*02:01~HLA-C*07:02~HLA-B*07:02+HLA-A*01:01~HLA-C*06:02~HLA-B*57:01
+Subject HLA-A*03:01~HLA-C*07:01~HLA-B*49:01+HLA-A*01:01~HLA-C*07:01~HLA-B*08:01
+Subject HLA-A*11:01~HLA-C*04:01~HLA-B*15:01+HLA-A*03:01~HLA-C*08:02~HLA-B*14:02
+Subject HLA-A*68:01~HLA-C*15:02~HLA-B*40:06+HLA-A*68:01~HLA-C*06:02~HLA-B*45:01</code></pre>
+<p>The “Gl String” column contains a <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3715123/pdf/tan0082-0106.pdf">GL String</a> formatted multi-locus HLA haplotype. In GL String format, the ~ operator denotes phase, and the + operator denotes copies of genes (in this case diploidy). <em>LDWrap()</em> requires that all HLA alleles are written with full allele name prefixes (e.g., <code>HLA-DRB1*01:01</code>). HLA data written using short prefixes (<code>DRB1*01:01</code>) or no prefixes (<code>01:01</code>) are not allowed.</p>
+</div>
+</div>
+<div id="outputs" class="section level2">
+<h2>Outputs</h2>
+<div id="cald-1" class="section level3">
+<h3>cALD()</h3>
+<p>By default, <em>cALD()</em> operates in “verbose” mode, and will write five lines of output to the console describing the phase-status of the LD analysis (phased or unphased), the loci analyzed, and the four LD measures calculated, as shown below.</p>
+<pre><code>&gt; cALD(drb1.dqb1.demo)
+## Calculating D', Wn and conditional ALD for 53 unphased genotypes at the DRB1 and DQB1 loci.
+## D' for DRB1~DQB1 haplotypes: 0.95892767844544 (0.9589) 
+## Wn for DRB1~DQB1 haplotypes: 0.811250972337927 (0.8113) 
+## Variation of DQB1 conditioned on DRB1 (WDQB1/DRB1) = 0.904035615838528 (0.904)
+## Variation of DRB1 conditioned on DQB1 (WDRB1/DQB1) = 0.778712696009626 (0.7787)</code></pre>
+<p>When <code>verbose=FALSE</code>, <em>cALD()</em> returns a vector of <em>D<sup>’</sup></em>, <em>W<sub>n</sub></em>, <em>W<sub>B/A</sub></em>, <em>W<sub>A/B</sub></em> and the number of haplotypes, as below.</p>
+<pre><code>&gt;cALDres &lt;- cALD(drb1.dqb1.demo, verbose=FALSE)
+&gt;cALDres
+## [1] &quot;0.958463650196244&quot; &quot;0.811184752436694&quot; &quot;0.903300938910147&quot; &quot;0.778712697633606&quot; &quot;53&quot;</code></pre>
+<p>In addition, <em>cALD()</em> can write a text file, containing a vector of all haplotypes, their frequencies and counts for the analyzed locus pair, to the working directory. This file also includes information on the dataset and phase status applied to the genotype data for the analysis. An example generted for the <code>drb1.dqb1.demo</code> dataset is shown below.</p>
+<pre><code>&gt; cALD(drb1.dqb1.demo,reportVector = TRUE)</code></pre>
+<p>Haplotype vector file contents:</p>
+<pre><code>Dataset                                         Phase   DRB1~DQB1   Frequency           Count
+DRB1~DQB1_haplotype_Vector_2018-05-02_16-53-12  FALSE   01:01~02:01 0                   0
+DRB1~DQB1_haplotype_Vector_2018-05-02_16-53-12  FALSE   01:02~02:01 0                   0
+DRB1~DQB1_haplotype_Vector_2018-05-02_16-53-12  FALSE   01:03~02:01 0                   0
+DRB1~DQB1_haplotype_Vector_2018-05-02_16-53-12  FALSE   03:01~02:01 0.094272076372315   79
+DRB1~DQB1_haplotype_Vector_2018-05-02_16-53-12  FALSE   04:01~02:01 0                   0
+DRB1~DQB1_haplotype_Vector_2018-05-02_16-53-12  FALSE   04:02~02:01 0                   0
+DRB1~DQB1_haplotype_Vector_2018-05-02_16-53-12  FALSE   04:03~02:01 0                   0
+DRB1~DQB1_haplotype_Vector_2018-05-02_16-53-12  FALSE   04:04~02:01 0                   0
+.
+.
+.</code></pre>
+</div>
+<div id="ldwrap-1" class="section level3">
+<h3>LDWrap</h3>
+<p><em>LDWrap()</em> sends data to <em>cALD()</em>, captures the vector of LD results returned by <em>cALD()</em>, and directs <em>cALD()</em> to write vectors of haplotypes for each locus pair. As a single haplotype vector file is written for each locus pair, <em>LDWrap()</em> directs <em>cALD()</em> to write n(n-1)/2 haplotype vector files, where n is the number of HLA loci in a haplotype. The only information <em>LDWrap()</em> returns to the console is a notification that the analysis has completed (<code>LD Analysis Complete</code>) and a notification that the input data is missing the required columns, as below.</p>
+<pre><code>&gt; LDWrap(drb1.dqb1.demo)
+LD Analysis Halted: Your data frame does not contain the proper columns. The 'Relation' and 'Gl String' columns are missing.</code></pre>
+<p>When all locus pairs have been analyzed by <em>cALD()</em>, <em>LDWrap()</em> writes a six-column CSV file (<code>*LD_results.csv</code>) of aggregated LD result vectors collected from <em>cALD()</em> to the working directory. The column headers in this file are Loc1~Loc2, identifying the locus pair, and <em>D<sup>’</sup></em>, <em>W<sub>n</sub></em>, <em>W<sub>B/A</sub></em>, <em>W<sub>A/B</sub></em> and N_Haplotypes. An example of this file is shown below.</p>
+<pre><code>&gt; LDWrap(hla.hap.demo)
+LD Analysis Complete</code></pre>
+<p>LD results file contents:</p>
+<pre><code>Loc1~Loc2,D',Wn,WLoc1/Loc2,WLoc2/Loc1,N_Haplotypes
+A~C,0.469024805013898,0.362566555750013,0.366359427624652,0.384413960789992,191
+A~B,0.540780240853345,0.446662593270748,0.36839918931955,0.471334711300434,241
+A~DRB1,0.400002012804198,0.335434108343871,0.27413544158564,0.320399398449896,233
+A~DRB3,Not Calculated,Subject Threshold=10,Complete subjects=0,.,
+.
+.
+.</code></pre>
+<p><em>LDWrap()</em> attemtps to peform these LD calculations for all pairs of the classical HLA loci – HLA-A, -C, -B, -DRB1, -DRB3, -DRB4, -DRB5, -DQA1, -DQB1, -DPA1 and -DPB1. If a haplotype dataset does not include all of these loci (e.g., A~DRB3, above), the *LD_results.csv file will include rows for locus pairs for which no data was avialable. As shown above, those rows contain the data, <code>Not Calculated</code>,<code>Subject Threshold=10</code>,<code>Complete subjects=0</code>, <code>.</code>, and ``.</p>
+</div>
+</div>
+<div id="parameters" class="section level2">
+<h2>Parameters</h2>
+<div id="cald-2" class="section level3">
+<h3>cALD</h3>
+<pre><code>cALD(dataSet, inPhase = FALSE, verbose = TRUE, reportVector = FALSE, vectorName = &quot;&quot;, vectorPrefix = &quot;&quot;)</code></pre>
+<p><strong>dataSet</strong></p>
+<p>Class: String. Required. No Default.</p>
+<p>e.g., <code>dataSet=&quot;foo.txt&quot;</code> or <code>dataSet=drb1.dqb1.demo</code></p>
+<p>Identifies the genotype data that you want to analyze. <code>dataSet</code> should identify a four-column data-frame or tab-delimited text file. Columns 1 and 2 contain genotype data for one genetic locus, with one allele in each column. Columns 3 and 4 contain genotype data for the second locus. The headers for columns 1 and 2 identify the first locus, and must be identical. Similarly, the headers for columns 3 and 4 identify the second locus, and must be identical.</p>
+<p><strong>inPhase</strong></p>
+<p>Class: Logical. Required. Default=FALSE.</p>
+<p>Identifies how the genotype data should be analyzed. When <code>inPhase=FALSE</code>, the expectation-maximization (EM) algorithm is applied to the genotype data to generate estimated haplotypes. LD values are calculated for those EM haplotypes. When <code>inPhase=TRUE</code>, the genotype data are treated as phased, with the alleles in column 1 in phase with those in column 3, and the alleles in column 2 in phase with those in column 4. LD values are calculated for those phased haplotypes.</p>
+<p><strong>verbose</strong></p>
+<p>Class: Logical. Required. Default=TRUE.</p>
+<p>Identifies how LD values should be reported. When <code>verbose=TRUE</code>, values for <em>D<sup>’</sup></em>, <em>W<sub>n</sub></em>, <em>W<sub>B/A</sub></em> and <em>W<sub>A/B</sub></em> are written to the console in a human readable form. When <code>verbose=FALSE</code>, those values are reported in a vector of length 4 and mode of “character”.</p>
+<p><strong>reportVector</strong></p>
+<p>Class: Logical. Required. Default=FALSE.</p>
+<p>Specifies if a file containing the haplotype vector for the analyzed locus pair should be exported. If <code>reportVector=FALSE</code> no vector is written. If <code>reportVector=TRUE</code> a tab-delimited text file consisting of five columns is written to the working directory. The file includes five columns, “Dataset”, “Phase”, the name of the analyzed locus pair, “Frequency”, and “Count”, which describe the frequency and count for all possible haplptypes.</p>
+<p><strong>vectorName</strong></p>
+<p>Class: String. Optional. No Default. (<code>reportVector=TRUE</code> specific).</p>
+<p>Provides a name for the tab-delimited haplotype vector file written when <code>reportVector=TRUE</code>. When <code>vectorName=&quot;foo&quot;</code> and <code>reportVector=TRUE</code>, the name of the haplotype vector file will be “foo.txt”. When <code>vectorName=&quot;&quot;</code> and <code>reportVector=TRUE</code>, the name of the haplotype vector file will include the loci analyzed and a time-stamp, formatted as “Locus1~Locus2_haplotype_Vector_yyyy-MM-dd-HH-mm-ss.txt”.</p>
+<p><strong>vectorPrefix</strong></p>
+<p>Class: String. Optional. No Default. (<code>reportVector=TRUE</code> specific).</p>
+<p>Applies a prefix that includes the applied phase-status to the name of the tab-delimited haplotype vector file written when <code>reportVector=TRUE</code>, when <code>vectorName=&quot;&quot;</code>. If any string is provided for vectorName, this parameter is ignored. E.g., when <code>reportVector=TRUE</code>, <code>vectorName=&quot;&quot;</code>, <code>vectorPrefix=&quot;foo&quot;</code> and <code>inPhase=FALSE</code>, the haplotype vector file will be named “foo_unphased_Locus1~Locus2_haplotype_Vector_yyyy-MM-dd-HH-mm-ss.txt”.</p>
+</div>
+<div id="ldwrap-2" class="section level3">
+<h3>LDWrap</h3>
+<pre><code>LDWrap(famData, threshold = 10, phased = TRUE, frameName = &quot;hla-family-data&quot;)</code></pre>
+<p><strong>famData</strong></p>
+<p>Class: String. Required. No Default.</p>
+<p>e.g., <code>famData=&quot;foo.txt&quot;</code> or <code>famData=hla.hap.demo</code></p>
+<p>Identifies the haplotype dataset that you want to analyze. <code>famData</code> should identify a data-frame or CSV file. This dataset must inlcude columns with the headers “Relation” and “Gl String”. If either (or both) of these column headers is not found in the dataset, <em>LDWrap()</em> will halt the analysis with a notification about the missing header(s). See the Functions and Input Formats section above for additional details about the dataset format.</p>
+<p><strong>threshold</strong></p>
+<p>Class: Numeric. Required. Default=10.</p>
+<p>Identifies the minimum number of subjects with haplotype data for a given locus pair required for the analysis of that locus pair. Analysis for that locus pair is not performed if the threshold is not met, and the LD results file will identify the threshold value and the number of subjects with data for that locus pair. If <code>threshold</code> is set to less than 1, it is automatically set to 1.</p>
+<p><strong>phased</strong></p>
+<p>Class: Logical. Required. Default=TRUE.</p>
+<p>Specifies whether the haplotype data should be treated as phased (<code>phased=TRUE</code>) or unphased (<code>phased=FALSE</code>) for analysis.</p>
+<p><strong>frameName</strong></p>
+<p>Class: String. Optional. Default=“hla-family-data”.</p>
+<p>Provides a name that will be included in the names of the result files if <code>famData</code> specifies a data frame. The value of <code>frameName</code> is passed to <em>cALD()</em> as the <code>vectorPrefix</code> parameter. If famData specifies a file, <code>frameName</code> is ignored.</p>
+</div>
+</div>
+<div id="examples" class="section level2">
+<h2>Examples</h2>
+<div id="cald-3" class="section level3">
+<h3>cALD()</h3>
+<pre><code># Analyzing the included HLA-DRB1 HLA-DQB1 genotype data and reporting results in the console
+cALD(drb1.dqb1.demo)
+# Alternatively returning a vector of LD results
+LDvec &lt;- cALD(drb1.dqb1.demo,verbose=FALSE)
+LDvec
+# Enforcing phase between columns 1 and 3 and between columns 2 and 4 for analysis
+cALD(drb1.dqb1.demo,inPhase=TRUE)
+# Writing the haplotype vector to a file in the working directory that will 
+# have the time-stamped name DRB1~DQB1_haplotype_Vector_yyyy-MM-dd_HH-mm-ss.txt
+cALD(drb1.dqb1.demo,reportVector = TRUE)
+# Writing the haplotype vector to a file in the working directory named &quot;foo.txt&quot; 
+cALD(drb1.dqb1.demo,reportVector = TRUE,vectorName = &quot;foo&quot;)
+# Writing the haplotype vector to a file in the working directory with the prefix &quot;foo_&quot;
+cALD(drb1.dqb1.demo,reportVector = TRUE,vectorPrefix = &quot;foo&quot;)</code></pre>
+</div>
+<div id="ldwrap-3" class="section level3">
+<h3>LDWrap()</h3>
+<pre><code># Analyzing the included HLA haplotype data 
+# This will create 15 haplotype vector files and one LD results file in the working directory
+LDWrap(hla.hap.demo)
+# Specifying the prefix &quot;foo_Phased&quot; for the LD results file, and &quot;foo_phased&quot; for the haplotype vector files
+LDWrap(hla.hap.demo,frameName = &quot;foo&quot;)</code></pre>
+</div>
+</div>
+<div id="section" class="section level2">
+<h2></h2>
+<p>End of vignette.</p>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
