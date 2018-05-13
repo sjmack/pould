@@ -95,10 +95,7 @@ LDWrap <- function(famData,threshold=10,phased=TRUE,frameName="hla-family-data")
       reportTab[tabRow,1] <- paste(colnames(masterTab[(2*i)-1]),colnames(masterTab[(2*j)-1]),sep="~")
       
       if(nrow(currPair[rowChoice==4,])>=threshold) {
-        write.table(currPair[rowChoice==4,],file = "Fam_LD.txt",quote = FALSE,append = FALSE,sep = "\t",row.names = FALSE,col.names=TRUE) 
-        #cALD(dataSet = currPair[rowChoice==4,], inPhase = TRUE,verbose = TRUE) 
-        ## ^^^^^^^^ this isn't working for reasons that escape me, becaue cALD doesn't like the data.frame version. So I have to write it. 
-     reportTab[tabRow,2:6] <- cALD(dataSet = "Fam_LD.txt", inPhase = phased,verbose = FALSE,reportVector = TRUE,vectorPrefix = sub(".csv","",x = famData,fixed=TRUE)) 
+         reportTab[tabRow,2:6] <- cALD(dataSet = currPair[rowChoice==4,], inPhase = phased,verbose = FALSE,reportVector = TRUE,vectorPrefix = sub(".csv","",x = famData,fixed=TRUE)) 
       } else {
         reportTab[tabRow,2:6] <- c("Not Calculated",paste("Subject Threshold",threshold,sep="="),paste("Complete subjects",nrow(currPair[rowChoice==4,]),sep="="),".","")
          }
@@ -113,7 +110,6 @@ LDWrap <- function(famData,threshold=10,phased=TRUE,frameName="hla-family-data")
   
   write.table(reportTab,sub(".csv",paste("_",phaseStat,"_LD_results",".csv",sep=""),x = famData,fixed=TRUE),append = FALSE,sep = ",",row.names = FALSE,quote=FALSE,col.names = TRUE)
 
-  file.remove("Fam_LD.txt") ## cleaning up my kludge
   cat("LD Analysis Complete")
   } else { cat(paste("LD Analysis Halted: Your ",if(dataFile){"file"}else{"data frame"}," does not contain the proper columns. ",if(!"Relation" %in% colnames(famTab) && !"Gl.String" %in% colnames(famTab)) {"The 'Relation' and 'Gl String' columns are missing."} else {if(!"Gl.String" %in% colnames(famTab)) {"The 'Gl String' column is missing."} else {"The 'Relation' column is missing."} },sep=""))}
   
@@ -170,7 +166,8 @@ finRes <- rep("",5) ## vector for the final results
 
 if (!is.data.frame(dataSet)) {
   gData <- read.table(paste(getwd(),dataSet,sep="/"), header=T,sep="\t",colClasses = "character")
-} else { gData <- dataSet}
+} else { gData <- dataSet
+         gData[] <- lapply(gData, as.character) } # Convert factors in passed dataset to characters
 
 gDataCols <- unique(gsub(".1","",colnames(gData),fixed=TRUE))
 

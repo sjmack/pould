@@ -1,4 +1,8 @@
 +------------------------------------------------------------------------------+
+pould v0.4.2.9000 date: 5-12-2018
+  -Streamlined the integration of cALD() into LDWrap().
+  
++------------------------------------------------------------------------------+
 pould v0.4.1.9000 date: 5-11-2018
   -Updated the Vignette and ReadMe file to correct versioning, punctuation and 
    spelling errors, and elaborate on documentation for cALD()'s report of the
