@@ -1,4 +1,11 @@
 +------------------------------------------------------------------------------+
+pould v0.5.0.9000 date: 5-18-2018
+  -Modified LDWrap() to avoid calling cALD() for locus pairs in which at least
+   one locus is monomorphic. In these cases, the *LF_results.csv file identifies
+   which loci were monomorphic for that locus pair.
+  -Updated documentation to reflect this.
+
++------------------------------------------------------------------------------+
 pould v0.4.2.9000 date: 5-12-2018
   -Streamlined the integration of cALD() into LDWrap().
   

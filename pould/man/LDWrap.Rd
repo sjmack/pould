@@ -24,6 +24,8 @@ This function coerces cALD() to generate a haplotype vector file for each locus 
 }
 \note{
 This function attemtps to peform these LD calculations for all pairs of the classical HLA loci -- HLA-A, -C, -B, -DRB1, -DRB3, -DRB4, -DRB5, -DQA1, -DQB1, -DPA1 and -DPB1. If a haplotype dataset does not include all of these loci, the *LD_results.csv file will include rows for locus pairs for which no data was avialable.
+
+When at least one locus in a locus pair is monomorphic, no LD calculations will be performed, and column 5 of the results for that locus pair will identify the monomorphic loci.
 }
 \examples{
 # Analyze the included example data

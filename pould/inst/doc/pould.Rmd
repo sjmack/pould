@@ -1,7 +1,7 @@
 ---
 title: "POULD: Phased Or Unphased Linkage Disequilibrium"
 author: "Steven J. Mack, PhD -- sjmack@chori.org"
-date: "May 12, 2018"
+date: "May 18, 2018"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using POULD}
@@ -11,7 +11,7 @@ vignette: >
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-* Package Version: 0.4.2.9000
+* Package Version: 0.5.0.9000
 
 # Overview
 
@@ -130,7 +130,13 @@ A~DRB3,Not Calculated,Subject Threshold=10,Complete subjects=0,.,
 .
 .
 ```
-*LDWrap()* attemtps to peform these LD calculations for all pairs of the classical HLA loci -- HLA-A, -C, -B, -DRB1, -DRB3, -DRB4, -DRB5, -DQA1, -DQB1, -DPA1 and -DPB1. If a haplotype dataset does not include all of these loci (e.g., A~DRB3, above), the *LD_results.csv file will include rows for locus pairs for which no data was avialable. As shown above, those rows contain the data, `Not Calculated`,`Subject Threshold=10`,`Complete subjects=0`, `.`, and ``. This information is also included for locus pairs for which the number of subjects with available haplotype data for that locus pair is below the `threshold` value (see below).
+*LDWrap()* attemtps to peform these LD calculations for all pairs of the classical HLA loci -- HLA-A, -C, -B, -DRB1, -DRB3, -DRB4, -DRB5, -DQA1, -DQB1, -DPA1 and -DPB1. If a haplotype dataset does not include all of these loci (e.g., A~DRB3, above), the `*LD_results.csv` file will include rows for locus pairs for which no data was avialable. As shown above, those rows contain the data, `Not Calculated`, `Subject Threshold=10`, `Complete subjects=0`, `.`, and ' '. This information is also included for locus pairs for which the number of subjects with available haplotype data for that locus pair is below the `threshold` value (see "Parameters", below). In cases where at least one locus in a pair is monomorphic, no LD calculations are performed, and the pertinent rows in the `*LD_results.csv` file will contain the data, `Not Calculated`, `Subject Threshold=10`, `Complete subjects=0`, `"locusName" is monomorphic.`, and ``, as shown below.
+```
+Loc1~Loc2,D',Wn,WLoc1/Loc2,WLoc2/Loc1,N_Haplotypes
+B~DRB3,Not Calculated,Subject Threshold=10,Complete subjects=130,DRB3 is monomorphic.,
+DRB3~DRB4,Not Calculated,Subject Threshold=10,Complete subjects=130,DRB3 is monomorphic. DRB4 is monomorphic.,
+DRB3~DQA1,Not Calculated,Subject Threshold=10,Complete subjects=93,DRB3 is monomorphic.,
+```
 
 ## Parameters
 

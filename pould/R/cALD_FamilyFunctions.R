@@ -22,6 +22,7 @@
 #' @param frameName A descriptor for the data frame of family data provided. Defaults to "hla-family-data". This value is not used if a CSV file is provided. 
 #' @keywords ldwrap ldwrapper wrapper
 #' @note This function attemtps to peform these LD calculations for all pairs of the classical HLA loci -- HLA-A, -C, -B, -DRB1, -DRB3, -DRB4, -DRB5, -DQA1, -DQB1, -DPA1 and -DPB1. If a haplotype dataset does not include all of these loci, the *LD_results.csv file will include rows for locus pairs for which no data was avialable.
+#' @note When at least one locus in a locus pair is monomorphic, no LD calculations will be performed, and column 5 of the results for that locus pair will identify the monomorphic loci.
 #' @export
 #' @examples 
 #' # Analyze the included example data
@@ -94,11 +95,16 @@ LDWrap <- function(famData,threshold=10,phased=TRUE,frameName="hla-family-data")
       
       reportTab[tabRow,1] <- paste(colnames(masterTab[(2*i)-1]),colnames(masterTab[(2*j)-1]),sep="~")
       
-      if(nrow(currPair[rowChoice==4,])>=threshold) {
-         reportTab[tabRow,2:6] <- cALD(dataSet = currPair[rowChoice==4,], inPhase = phased,verbose = FALSE,reportVector = TRUE,vectorPrefix = sub(".csv","",x = famData,fixed=TRUE)) 
-      } else {
+      if(nrow(currPair[rowChoice==4,]) < threshold) {
         reportTab[tabRow,2:6] <- c("Not Calculated",paste("Subject Threshold",threshold,sep="="),paste("Complete subjects",nrow(currPair[rowChoice==4,]),sep="="),".","")
-         }
+       } else {
+        if(nrow(unique(rbind(currPair[1],currPair[2]))) == 1 || nrow(unique(rbind(currPair[3],currPair[4]))) == 1) {
+          reportTab[tabRow,2:6] <- c("Not Calculated",paste("Subject Threshold",threshold,sep="="),paste("Complete subjects",nrow(currPair[rowChoice==4,]),sep="="),paste(if(nrow(unique(rbind(currPair[1],currPair[2]))) ==1){paste(colnames(currPair[1]),"is monomorphic.",sep=" ")}else{""},if(nrow(unique(rbind(currPair[3],currPair[4]))) == 1){paste(colnames(currPair[3]),"is monomorphic.",sep=" ")}else{""},sep=" "),"")
+        } else {
+          reportTab[tabRow,2:6] <- cALD(dataSet = currPair[rowChoice==4,], inPhase = phased,verbose = FALSE,reportVector = TRUE,vectorPrefix = sub(".csv","",x = famData,fixed=TRUE)) 
+        }
+      }
+      
       tabRow <- tabRow + 1
       
     }
