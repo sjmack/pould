@@ -1,7 +1,7 @@
 ---
 title: "POULD: Phased Or Unphased Linkage Disequilibrium"
 author: "Steven J. Mack, PhD -- sjmack@chori.org"
-date: "June 6, 2018"
+date: "June 27, 2018"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using POULD}
@@ -11,7 +11,7 @@ vignette: >
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-* Package Version: 0.6.0.9000
+* Package Version: 0.6.1.9000
 
 # Overview
 
@@ -69,7 +69,7 @@ Subject	HLA-A*03:01~HLA-C*07:01~HLA-B*49:01+HLA-A*01:01~HLA-C*07:01~HLA-B*08:01
 Subject	HLA-A*11:01~HLA-C*04:01~HLA-B*15:01+HLA-A*03:01~HLA-C*08:02~HLA-B*14:02
 Subject	HLA-A*68:01~HLA-C*15:02~HLA-B*40:06+HLA-A*68:01~HLA-C*06:02~HLA-B*45:01
 ```
-The "Gl String" column contains a [GL String](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3715123/pdf/tan0082-0106.pdf) formatted multi-locus HLA haplotype. In GL String format, the ~ operator denotes phase, and the + operator denotes copies of genes (in this case diploidy). *LDWrap()* requires that all HLA alleles are written with full allele name prefixes (e.g., `HLA-DRB1*01:01`). HLA data written using short prefixes (`DRB1*01:01`) or no prefixes (`01:01`) are not allowed.
+The "Gl String" column contains a [GL String](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3715123/pdf/tan0082-0106.pdf) formatted multi-locus HLA haplotype. In GL String format, the ~ operator denotes phase, and the + operator denotes copies of genes (in this case diploidy). *LDWrap()* requires that all HLA alleles are written with full allele name prefixes (e.g., `HLA-DRB1*01:01`). HLA data written using short prefixes (`DRB1*01:01`) or no prefixes (`01:01`) are not allowed. Unusual allele names (`HLA-A*NULL`, `HLA-DRB1*NoMatch`, `HLA-DPB1*NT`) and truncated versions of allele names (`HLA-A*01`, `HLA-A*01:01`, `HLA-A*01:01:01`, etc.) will be analyzed as distinct alleles, and may skew analytic results.
 
 ### LD.sign.test
 
