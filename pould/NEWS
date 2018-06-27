@@ -1,6 +1,10 @@
 +------------------------------------------------------------------------------+
 pould v0.6.1.9000 date: 6-27-2018
+<<<<<<< HEAD
   -Updated LDWrap() documentation to include caveats regarding the analysis of 
+=======
+  -Updated LDWrap() documentation to include caveats regaring the analysis of 
+>>>>>>> 82700ead688a257f4fb45e04fc2bec7e3e810bad
    unusual and truncated allele names.
   -Added package versioning to the README.md document. 
    
