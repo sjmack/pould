@@ -1,4 +1,10 @@
 +------------------------------------------------------------------------------+
+pould v0.6.1.9000 date: 6-27-2018
+  -Updated LDWrap() documentation to include caveats regarding the analysis of 
+   unusual and truncated allele names.
+  -Added package versioning to the README.md document. 
+   
++------------------------------------------------------------------------------+
 pould v0.6.0.9000 date: 6-6-2018
   -Added the LD.sign.test() function.
   -Updated documentation to reflect this addition.

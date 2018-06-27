@@ -12,6 +12,7 @@
 
 <meta name="author" content="Steven J. Mack, PhD – sjmack@chori.org" />
 
+<meta name="date" content="2018-06-27" />
 
 <title>POULD: Phased Or Unphased Linkage Disequilibrium</title>
 
@@ -31,12 +32,12 @@
 
 <h1 class="title toc-ignore">POULD: Phased Or Unphased Linkage Disequilibrium</h1>
 <h4 class="author"><em>Steven J. Mack, PhD – <a href="mailto:sjmack@chori.org">sjmack@chori.org</a></em></h4>
-<h4 class="date"><em>June 6, 2018</em></h4>
+<h4 class="date"><em>June 27, 2018</em></h4>
 
 
 
 <ul>
-<li>Package Version: 0.6.0.9000</li>
+<li>Package Version: 0.6.1.9000</li>
 </ul>
 <div id="overview" class="section level1">
 <h1>Overview</h1>
@@ -78,7 +79,7 @@ Subject HLA-A*02:01~HLA-C*07:02~HLA-B*07:02+HLA-A*01:01~HLA-C*06:02~HLA-B*57:01
 Subject HLA-A*03:01~HLA-C*07:01~HLA-B*49:01+HLA-A*01:01~HLA-C*07:01~HLA-B*08:01
 Subject HLA-A*11:01~HLA-C*04:01~HLA-B*15:01+HLA-A*03:01~HLA-C*08:02~HLA-B*14:02
 Subject HLA-A*68:01~HLA-C*15:02~HLA-B*40:06+HLA-A*68:01~HLA-C*06:02~HLA-B*45:01</code></pre>
-<p>The “Gl String” column contains a <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3715123/pdf/tan0082-0106.pdf">GL String</a> formatted multi-locus HLA haplotype. In GL String format, the ~ operator denotes phase, and the + operator denotes copies of genes (in this case diploidy). <em>LDWrap()</em> requires that all HLA alleles are written with full allele name prefixes (e.g., <code>HLA-DRB1*01:01</code>). HLA data written using short prefixes (<code>DRB1*01:01</code>) or no prefixes (<code>01:01</code>) are not allowed.</p>
+<p>The “Gl String” column contains a <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3715123/pdf/tan0082-0106.pdf">GL String</a> formatted multi-locus HLA haplotype. In GL String format, the ~ operator denotes phase, and the + operator denotes copies of genes (in this case diploidy). <em>LDWrap()</em> requires that all HLA alleles are written with full allele name prefixes (e.g., <code>HLA-DRB1*01:01</code>). HLA data written using short prefixes (<code>DRB1*01:01</code>) or no prefixes (<code>01:01</code>) are not allowed. Unusual allele names (<code>HLA-A*NULL</code>, <code>HLA-DRB1*NoMatch</code>, <code>HLA-DPB1*NT</code>) and truncated versions of allele names (<code>HLA-A*01</code>, <code>HLA-A*01:01</code>, <code>HLA-A*01:01:01</code>, etc.) will be analyzed as distinct alleles, and may skew analytic results.</p>
 </div>
 <div id="ld.sign.test" class="section level3">
 <h3>LD.sign.test</h3>
