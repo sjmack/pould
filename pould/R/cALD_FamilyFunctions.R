@@ -102,7 +102,7 @@ LDWrap <- function(famData,threshold=10,phased=TRUE,frameName="hla-family-data")
         if(nrow(unique(rbind(currPair[1],currPair[2]))) == 1 || nrow(unique(rbind(currPair[3],currPair[4]))) == 1) {
           reportTab[tabRow,2:6] <- c("Not Calculated",paste("Subject Threshold",threshold,sep="="),paste("Complete subjects",nrow(currPair[rowChoice==4,]),sep="="),paste(if(nrow(unique(rbind(currPair[1],currPair[2]))) ==1){paste(colnames(currPair[1]),"is monomorphic.",sep=" ")}else{""},if(nrow(unique(rbind(currPair[3],currPair[4]))) == 1){paste(colnames(currPair[3]),"is monomorphic.",sep=" ")}else{""},sep=" "),"")
         } else {
-          reportTab[tabRow,2:6] <- cALD(dataSet = currPair[rowChoice==4,], inPhase = phased,verbose = FALSE,reportVector = TRUE,vectorPrefix = sub(".csv","",x = famData,fixed=TRUE)) 
+          reportTab[tabRow,2:6] <- cALD(dataSet = currPair[rowChoice==4,], inPhase = phased,verbose = FALSE,reportVector = TRUE,vectorPrefix = sub(".csv","",x = basename(famData),fixed=TRUE)) 
         }
       }
       
@@ -115,7 +115,7 @@ LDWrap <- function(famData,threshold=10,phased=TRUE,frameName="hla-family-data")
   phaseStat <- "Phased"
   if(phased == FALSE) {phaseStat <- "Unphased"}
   
-  write.table(reportTab,sub(".csv",paste("_",phaseStat,"_LD_results",".csv",sep=""),x = famData,fixed=TRUE),append = FALSE,sep = ",",row.names = FALSE,quote=FALSE,col.names = TRUE)
+  write.table(reportTab,sub(".csv",paste("_",phaseStat,"_LD_results",".csv",sep=""),x = basename(famData),fixed=TRUE),append = FALSE,sep = ",",row.names = FALSE,quote=FALSE,col.names = TRUE)
 
   cat("LD Analysis Complete")
   } else { cat(paste("LD Analysis Halted: Your ",if(dataFile){"file"}else{"data frame"}," does not contain the proper columns. ",if(!"Relation" %in% colnames(famTab) && !"Gl.String" %in% colnames(famTab)) {"The 'Relation' and 'Gl String' columns are missing."} else {if(!"Gl.String" %in% colnames(famTab)) {"The 'Gl String' column is missing."} else {"The 'Relation' column is missing."} },sep=""))}
@@ -290,8 +290,8 @@ writeVector <- function(nLoc1,Res,hapVec,numSamp,writeName,genPhase,Prefix){
   
   phaseType <- "unphased_"
   if(genPhase) {phaseType <- "phased_"}
-  if(Prefix != "") {Prefix <- paste(Prefix,"_",phaseType, sep="")}
-  if (writeName == "") {writeName = paste(Prefix,paste(paste(Res[1,2],Res[nLoc1+1,2],sep="~"),"haplotype_Vector",Sys.Date(),gsub(":","-",format(Sys.time(), "%X")),sep="_"),sep="")}
+  if(Prefix != "") {Prefix <- paste(basename(Prefix),"_",phaseType, sep="")}
+  if (writeName == "") {writeName = paste(Prefix,paste(paste(Res[1,2],Res[nLoc1+1,2],sep="~"),"haplotype_Vector",Sys.Date(),gsub(":","-",format(Sys.time(), "%X")),sep="_"),sep="")} else {writeName <- basename(writeName)}
   
   hapNames <- matrix(0,nLoc1,nrow(Res)-nLoc1)
 

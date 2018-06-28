@@ -1,4 +1,9 @@
 +------------------------------------------------------------------------------+
+pould v0.6.2.9000 date: 6-28-2018
+  -Modified cALD(), LDWrap() and LD.sign.test() so that output files are 
+   always written to the working directory. 
+  
++------------------------------------------------------------------------------+
 pould v0.6.1.9000 date: 6-27-2018
   -Updated LDWrap() documentation to include caveats regarding the analysis of 
    unusual and truncated allele names.

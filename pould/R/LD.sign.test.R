@@ -68,7 +68,7 @@ colnames(result) <- c("D'","Wn","WLoc1/Loc2","WLoc2/Loc1","N_Haplotypes")
   
 rownames(result) <- c("#unphased > phased","#unphased = phased","#locus pairs","p-values")
 
-if (!returnFrame) {write.table(result,paste(dataName,"_LD-sign-test_results.csv",sep=""),append = FALSE,quote = FALSE,sep = ",",row.names = TRUE,col.names = NA)}
+if (!returnFrame) {write.table(result,paste(basename(dataName),"_LD-sign-test_results.csv",sep=""),append = FALSE,quote = FALSE,sep = ",",row.names = TRUE,col.names = NA)}
 
 if(verbose){
 cat(paste("Sign Test results for the ",dataName," dataset for ",nTrials," locus pairs.",'\n',sep=""))
