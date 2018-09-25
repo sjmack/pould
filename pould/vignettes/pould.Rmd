@@ -1,7 +1,7 @@
 ---
 title: "POULD: Phased Or Unphased Linkage Disequilibrium"
 author: "Steven J. Mack, PhD -- sjmack@chori.org"
-date: "June 28, 2018"
+date: "September 24, 2018"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using POULD}
@@ -11,7 +11,7 @@ vignette: >
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-* Package Version: 0.6.2.9000
+* Package Version: 0.6.3.9000
 
 # Overview
 
@@ -57,6 +57,9 @@ While HLA data are shown above, *cALD()* can accept any genetic data. The exampl
         04:01          01:01           A             C
         05:01          01:02           C             C
 ```
+
+**Note**: *cALD()* uses the *LDkl()* function from the R *gap* package. The version of the *gap* package currently in CRAN (v1.1-22) limits *LDkl()* to 100 alleles per locus. Analyses in which the product of the number of alleles at the two loci is more than 10000 will cause R to abort. This limit has been changed to 1000 alleles per locus in *gap* version 1.1-23. This version is available on GitHub, and can be installed using the *devtools* package -- `devtools::install_github("jinghuazhao/R/gap")`.
+
 ### LDWrap
 
 The *LDWrap()* function parses HLA haplotype data generated as part of the 17th International HLA and Immunogenetic Workshop Family Haplotype Project. The function accepts a data frame or CSV formatted text file, and passes genotype data for all pairs of HLA loci in that dataset to *cALD()* for LD analysis.

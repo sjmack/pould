@@ -1,4 +1,12 @@
 +------------------------------------------------------------------------------+
+pould v0.6.3.9000 date: 9-24-2018
+  -Modified Vignette to reflect the limitations of LDkl in the gap package
+   and the availability of an updated gap package on GitHub.
+  -Modified ReadMe.md document to include devtools installation instructions.
+  -Thanks to L. Creary for identifying both issues.
+  -Modified Description to mention sign tests.
+  
++------------------------------------------------------------------------------+
 pould v0.6.2.9000 date: 6-28-2018
   -Modified cALD(), LDWrap() and LD.sign.test() so that output files are 
    always written to the working directory. 
