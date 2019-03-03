@@ -1,5 +1,5 @@
 ### Caluclating LD for 17th WS Family Data
-### August 27-28, 2017 v0.01 -- Steven J. Mack
+### August 27-28, 2017 v0.02 -- Steven J. Mack
 ##-----------------------------------------------------------------------------------------------------------------------------------------##
 ## Wrapper for parsing 17th WS Family Data files with phased Haplotype data
 ## Parameters:
@@ -28,6 +28,7 @@
 #' @examples 
 #' # Analyze the included example data
 #' LDWrap(hla.hap.demo,frameName="HLADemo") 
+#' @references Kazutoyo et al. Hum Immunol. 2019 (https://doi.org/10.1016/j.humimm.2019.01.010)
 
 LDWrap <- function(famData,threshold=10,phased=TRUE,frameName="hla-family-data"){
   #library(haplo.stats)
@@ -47,15 +48,22 @@ LDWrap <- function(famData,threshold=10,phased=TRUE,frameName="hla-family-data")
   parentalHaps <- famTab[famTab$Relation!="child",]
   haps <- read.table(text=parentalHaps$Gl.String,sep="+",colClasses = "character")
 
+  ## v0.2 incorporating extractLoci()
+  locDetails <- extractLoci(haps) # v0.2
+  locNames <- locDetails$loci # v0.2
+  locPrefix <- locDetails$prefix # v0.2
+  
   nSamp <- nrow(haps)
-  nLoc <- 11
+#  nLoc <- 11
+  nLoc <- length(locNames)/2 # v0.2
   if(threshold<1){threshold <- 1} # in case someone sets threshold to 0 or less.
   
-  locNames <- c("A","A_1","C","C_1","B","B_1","DRB1","DRB1_1","DRB3","DRB3_1","DRB4","DRB4_1","DRB5","DRB5_1","DQA1","DQA1_1","DQB1","DQB1_1","DPA1","DPA1_1","DPB1","DPB1_1")
+#  locNames <- c("A","A_1","C","C_1","B","B_1","DRB1","DRB1_1","DRB3","DRB3_1","DRB4","DRB4_1","DRB5","DRB5_1","DQA1","DQA1_1","DQB1","DQB1_1","DPA1","DPA1_1","DPB1","DPB1_1")
   ##  "A","A","C","C","B","B","DRB1","DRB1","DRB3","DRB3","DRB4","DRB4","DRB5","DRB5","DQA1","DQA1","DQB1","DQB1","DPA1","DPA1","DPB1","DPB1"
   ##   1   2   3   4   5   6     7      8      9     10     11     12     13     14     15     16     17     18     19     20     21     22
   
-  masterTab <- data.frame(matrix(NA, nrow = nSamp, ncol = 22))
+#  masterTab <- data.frame(matrix(NA, nrow = nSamp, ncol = 22))
+  masterTab <- data.frame(matrix(NA, nrow = nSamp, ncol = length(locNames))) # v0.2
   reportTab <- data.frame(matrix(NA,nrow=(nLoc*(nLoc-1))/2,ncol=6))
   tabRow = 1
   
@@ -75,13 +83,14 @@ LDWrap <- function(famData,threshold=10,phased=TRUE,frameName="hla-family-data")
       
       currLoc <- substr(hap1[j],regexpr("-",text = hap1[j],fixed=TRUE)[1]+1,regexpr("*",text = hap1[j],fixed=TRUE)[1]-1)
       ## remove the locux prefixes
-      masterTab[i,names(masterTab)==currLoc] <- gsub(paste("HLA-",currLoc,"*",sep=""),"",hap1[j],fixed=TRUE)
+#      masterTab[i,names(masterTab)==currLoc] <- gsub(paste("HLA-",currLoc,"*",sep=""),"",hap1[j],fixed=TRUE)
+      masterTab[i,names(masterTab)==currLoc] <- gsub(paste(locPrefix,currLoc,"*",sep=""),"",hap1[j],fixed=TRUE) # v0.2
     }
     # Have to do this separately, because of structural variation in the DRB3/4/5 loci may mean uneven #s of haplotypes in each string
     for(j in 1:nLoc2) {
       currLoc <- substr(hap2[j],regexpr("-",text = hap2[j],fixed=TRUE)[1]+1,regexpr("*",text = hap2[j],fixed=TRUE)[1]-1)
-      masterTab[i,names(masterTab)==paste(currLoc,"1",sep="_")] <- gsub(paste("HLA-",currLoc,"*",sep=""),"",hap2[j],fixed=TRUE)
-      
+#      masterTab[i,names(masterTab)==paste(currLoc,"1",sep="_")] <- gsub(paste("HLA-",currLoc,"*",sep=""),"",hap2[j],fixed=TRUE)
+      masterTab[i,names(masterTab)==paste(currLoc,"1",sep="_")] <- gsub(paste(locPrefix,currLoc,"*",sep=""),"",hap2[j],fixed=TRUE) # v0.2
     }
   }
 

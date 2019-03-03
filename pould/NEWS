@@ -1,4 +1,27 @@
 +------------------------------------------------------------------------------+
+pould v0.8.1.9000 date: 2-28-2019
+  -Added the color parameter to LD.heat.map(), allowing color or grey-scale 
+   heat-map plots to be generated.
+  -Added the color parameter to the Vignette and LD.heat.map() documentation.
+  -Added keywords to the LD.heat.map() documentation.
+  -Modified the LDWrap() Vignette to make it clear that ambiguous allele and
+   genotype data cannot be included in LDWrap() data files.
+  -Removed example non-ggplot heat-map code.
+
++------------------------------------------------------------------------------+
+pould v0.8.0.9000 date: 2-27-2019
+  -Added the LD.heat.map() function to generate heat maps of LD values from
+   the LD data exported from LDWrap().
+  -Updated the ReadMe.md and Vignette documents to reflect the changes to 
+   LDWrap() and the addition of the LD.heat.map() function.
+  
++------------------------------------------------------------------------------+
+pould v0.7.0.9000 date: 2-6-2019
+  -Added a Reference to the documentation of LDWrap() and LD.sign.test().
+  -Added the extractLoci() function to LDWrap() to automate the processing of
+   locus information from haplotype datasets, accommodating non-HLA data.
+   
++------------------------------------------------------------------------------+
 pould v0.6.3.9000 date: 9-24-2018
   -Modified Vignette to reflect the limitations of LDkl in the gap package
    and the availability of an updated gap package on GitHub.
