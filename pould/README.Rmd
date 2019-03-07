@@ -21,6 +21,12 @@ The *pould* package calculates four linkage disequilibrium (LD) statistics -- *D
 
 The *pould* package can be installed from GitHub using the R *devtools* package --  `devtools::install_github("IHIW/pould/pould")`.
 
+**Note**: When installing *pould* from GitHub in a Windows environment, the following warning message may appear on Windows systems that do not have Rtools v3.5 installed:
+`In untar2(tarfile, files, list, exdir) :
+  skipping pax global extended headers
+`
+This warning does not impact the function of the package. Installing [Rtools v3.5](https://cran.r-project.org/bin/windows/Rtools/) will prevent these warnings.
+
 ## Example
 In addiiton to simply calculating LD values, *pould* can be used to compare LD for phased and unphased versions of the same dataset, e.g., to examine the extent to which phasing via segregation analysis impacts LD relative to phasing estimation via the expectation-maximization (EM) algorithm. In the example below, DRB1 and DQB1 genotype data were extracted from six-locus haplotypes that had been phased using the EM method ([Mack et al. Genes Immun. 2018](https://doi.org/10.1038/s41435-017-0006-8)). In the first application of *cALD()*, that phasing information is ignored, and the EM algorithm is applied to estimate haplotypes. In the second application of *cALD()*, the original six-locus phasing information is retained.
 

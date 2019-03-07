@@ -8,6 +8,8 @@ The *pould* package calculates four linkage disequilibrium (LD) statistics -- *D
 
 The *pould* package can be installed from GitHub using the R *devtools* package -- `devtools::install_github("IHIW/pould/pould")`.
 
+**Note**: When installing *pould* from GitHub in a Windows environment, the following warning message may appear on Windows systems that do not have Rtools v3.5 installed: `In untar2(tarfile, files, list, exdir) :   skipping pax global extended headers` This warning does not impact the function of the package. Installing [Rtools v3.5](https://cran.r-project.org/bin/windows/Rtools/) will prevent these warnings.
+
 Example
 -------
 
@@ -21,10 +23,10 @@ library("pould")
 data(drb1.dqb1.demo)
 cALD(drb1.dqb1.demo,inPhase=FALSE)
 #> Calculating D', Wn and conditional ALD for 53 unphased genotypes at the DRB1 and DQB1 loci.
-#> D' for DRB1~DQB1 haplotypes: 0.958463652709397 (0.9585) 
-#> Wn for DRB1~DQB1 haplotypes: 0.811184753450625 (0.8112) 
-#> Variation of DQB1 conditioned on DRB1 (WDQB1/DRB1) = 0.903300941479792 (0.9033)
-#> Variation of DRB1 conditioned on DQB1 (WDRB1/DQB1) = 0.778712697142603 (0.7787)
+#> D' for DRB1~DQB1 haplotypes: 0.958927661187799 (0.9589) 
+#> Wn for DRB1~DQB1 haplotypes: 0.811250965375916 (0.8113) 
+#> Variation of DQB1 conditioned on DRB1 (WDQB1/DRB1) = 0.904035598207342 (0.904)
+#> Variation of DRB1 conditioned on DQB1 (WDRB1/DQB1) = 0.778712699381306 (0.7787)
 
 cALD(drb1.dqb1.demo,inPhase=TRUE)
 #> Calculating D', Wn and conditional ALD for 106 phased genotypes at the DRB1 and DQB1 loci.
