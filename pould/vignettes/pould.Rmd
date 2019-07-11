@@ -1,7 +1,7 @@
 ---
 title: "POULD: Phased Or Unphased Linkage Disequilibrium"
 author: "Steven J. Mack, PhD -- sjmack@chori.org"
-date: "June 21, 2019"
+date: "July 3, 2019"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using POULD}
@@ -11,7 +11,7 @@ vignette: >
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-* Package Version: 0.8.2.9000
+* Package Version: 0.8.3.9000
 
 # Overview
 
@@ -28,6 +28,8 @@ Cramér H. [Mathematical Models of Statistics](https://archive.org/details/in.er
 Thomson G, Single RM. [Genetics. 2014;198(1):321-31](https://doi.org/10.1534/genetics.114.165266).
 
 *Pould* accepts genotype and haplotype data for *individual subjects* as input data. To calculate the cALD measures using haplotype frequency data, try the [*asymLD*](https://cran.r-project.org/web/packages/asymLD/index.html) package. See: Single et al. [Hum Immunol. 2016;77(3):288-294](https://doi.org/10.1016/j.humimm.2015.09.001) for more information about *asymLD*. 
+
+**Note**: *Pould*'s *cALD()* function calls the *LDkl()* function from the R *gap* package. The version of the *gap* package currently in CRAN (v1.1-22) limits *LDkl()* to 100 alleles per locus. Analyses in which the product of the number of alleles at the two loci is more than 10000 will cause R to abort. This limit has been changed to 1000 alleles per locus in *gap* version 1.1-23. This version is available on GitHub, and can be installed using the *devtools* package -- `devtools::install_github("jinghuazhao/R/gap")`.
 
 ## Functions and Input Formats
 
@@ -58,8 +60,6 @@ While HLA data are shown above, *cALD()* can accept any genetic data. The exampl
         04:01          01:01           A             C
         05:01          01:02           C             C
 ```
-
-**Note**: *cALD()* uses the *LDkl()* function from the R *gap* package. The version of the *gap* package currently in CRAN (v1.1-22) limits *LDkl()* to 100 alleles per locus. Analyses in which the product of the number of alleles at the two loci is more than 10000 will cause R to abort. This limit has been changed to 1000 alleles per locus in *gap* version 1.1-23. This version is available on GitHub, and can be installed using the *devtools* package -- `devtools::install_github("jinghuazhao/R/gap")`.
 
 ### LDWrap
 

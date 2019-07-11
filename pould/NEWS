@@ -1,4 +1,12 @@
 +------------------------------------------------------------------------------+
+pould v0.8.3.9000 date 7-3-2019
+   -Corrected the citation for the publication describing this package in the
+    LD.heat.map(), LD.sign.test() and LDWrap() functions.
+   -Expanded the package name in the GitHub ReadMe document.
+   -Added the note about the LDkl() function in the gap package to the ReadMe
+    and moved this note higher in the vignette.
+    
++------------------------------------------------------------------------------+
 pould v0.8.2.9000 date: 6-21-2019
   -Added the phasedLabel and unphasedLabel to LD.heat.map(), allowing users
    to specify the labels associated with the upper and lower half of each plot.

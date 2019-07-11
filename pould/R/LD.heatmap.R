@@ -20,7 +20,7 @@
 #' # which are saved as "hla-family-data_Phased_LD_results.csv" and 
 #' # "hla-family-data_Unphased_LD_results.csv", respectively. 
 #' LD.heat.map("hla-family-data")
-#' @references Kazutoyo et al. Hum Immunol. 2019 https://doi.org/10.1016/j.humimm.2019.01.010
+#' @references Osoegawa et al. Hum Immunol. 2019 https://doi.org/10.1016/j.humimm.2019.01.010
 
 LD.heat.map <- function(dataName,color=TRUE,phasedLabel="Phased",unphasedLabel="EM-estimated") {
 

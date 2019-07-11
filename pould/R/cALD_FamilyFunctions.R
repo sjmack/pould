@@ -28,7 +28,7 @@
 #' @examples 
 #' # Analyze the included example data
 #' LDWrap(hla.hap.demo,frameName="HLADemo") 
-#' @references Kazutoyo et al. Hum Immunol. 2019 (https://doi.org/10.1016/j.humimm.2019.01.010)
+#' @references Osoegawa et al. Hum Immunol. 2019 (https://doi.org/10.1016/j.humimm.2019.01.010)
 
 LDWrap <- function(famData,threshold=10,phased=TRUE,frameName="hla-family-data"){
   #library(haplo.stats)

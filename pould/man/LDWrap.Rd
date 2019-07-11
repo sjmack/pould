@@ -34,7 +34,7 @@ This function requires HLA allele names that include complete locus prefixes (e.
 LDWrap(hla.hap.demo,frameName="HLADemo") 
 }
 \references{
-Kazutoyo et al. Hum Immunol. 2019 (https://doi.org/10.1016/j.humimm.2019.01.010)
+Osoegawa et al. Hum Immunol. 2019 (https://doi.org/10.1016/j.humimm.2019.01.010)
 }
 \keyword{ldwrap}
 \keyword{ldwrapper}
