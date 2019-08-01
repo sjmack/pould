@@ -1,5 +1,5 @@
 ### Caluclating LD for 17th WS Family Data
-### August 27-28, 2017 v0.02 -- Steven J. Mack
+### July 31, 2019 v0.3.1 -- Steven J. Mack
 ##-----------------------------------------------------------------------------------------------------------------------------------------##
 ## Wrapper for parsing 17th WS Family Data files with phased Haplotype data
 ## Parameters:
@@ -20,19 +20,23 @@
 #' @param threshold An integer that specifies the minimnum number of subjects allowed for the analysis of a locus-pair. The default value is 10. If the number of subjects with haplotypes for a locus pair is less than the threshold, the *_LD_results.csv file will contain 'Not Calculated' 'Subject Threshold=##' 'Complete subjects=#' '.' in columns 2-5 for that locus pair, where ## is the set threshold and # is the number of subjects. Column 6 will be empty.
 #' @param phased A boolean that determines if the LD calculations should be performed for phased data (TRUE) or unphased data (FALSE). If phased=FALSE, the EM algorithm is used to estimate haplotypes for the data in the Gl String column.
 #' @param frameName A descriptor for the data frame of family data provided. Defaults to "hla-family-data". This value is not used if a CSV file is provided. 
+#' @param trunc An integer that specifies the number of fields to which colon-delimited allele names in famdData should be truncated. The default value of 0 indicates no truncation. A value higher than the number of fields in the supplied allele data will result in no truncation. When a positive value of trunc is provided, the names of the output files will include the specified truncation level.  
 #' @keywords ldwrap ldwrapper wrapper
 #' @note This function attemtps to peform these LD calculations for all pairs of the classical HLA loci -- HLA-A, -C, -B, -DRB1, -DRB3, -DRB4, -DRB5, -DQA1, -DQB1, -DPA1 and -DPB1. If a haplotype dataset does not include all of these loci, the *LD_results.csv file will include rows for locus pairs for which no data was avialable.
 #' @note When at least one locus in a locus pair is monomorphic, no LD calculations will be performed, and column 5 of the results for that locus pair will identify the monomorphic loci.
-#' @note This function requires HLA allele names that include complete locus prefixes (e.g., “HLA-A”, “HLA-DRB3"); LDWrap() parses these prefixes to identify each locus, but does not perform any additional parsing or validation of HLA allele names. Unusual allele names (e.g., `HLA-A*NULL`, `HLA-DRB1*NoMatch`, `HLA-DPB1*NT`) and truncated versions of allele names (e.g., `HLA-A*01`, `HLA-A*01:01`, `HLA-A*01:01:01`, etc.) will be analyzed as distinct alleles. Including unusual allele names or different truncated versions of the same allele name in a dataset will likely skew the analytic results.
+#' @note This function requires HLA allele names that include complete locus prefixes (e.g., “HLA-A”, “HLA-DRB3"); LDWrap() parses these prefixes to identify each locus, but does not perform any additional parsing or validation of HLA allele names. Unusual allele names (e.g., `HLA-A*NULL`, `HLA-DRB1*NoMatch`, `HLA-DPB1*NT`) and truncated versions of allele names (e.g., `HLA-A*01`, `HLA-A*01:01`, `HLA-A*01:01:01`, etc.) will be analyzed as distinct alleles. Including unusual allele names or different truncated versions of the same allele name in a dataset will likely skew the analytic results. In the latter case, the trunc parameter can be used to specify analysis at a specific number of fields.
 #' @export
 #' @examples 
 #' # Analyze the included example data
 #' LDWrap(hla.hap.demo,frameName="HLADemo") 
+#' # Analyze the includeed example data with all alleles truncated to one field
+#' # LDWrap(hla.hap.demo,frameName="HLADemoTrunc",trunc=1) 
 #' @references Osoegawa et al. Hum Immunol. 2019 (https://doi.org/10.1016/j.humimm.2019.01.010)
 
-LDWrap <- function(famData,threshold=10,phased=TRUE,frameName="hla-family-data"){
+LDWrap <- function(famData,threshold=10,phased=TRUE,frameName="hla-family-data",trunc=0){
   #library(haplo.stats)
   #library(gap)
+  if(missing(famData)) {return(cat("Please provide a value for the famData parameter."))}
   
   dataFile <- TRUE
 
@@ -47,6 +51,11 @@ LDWrap <- function(famData,threshold=10,phased=TRUE,frameName="hla-family-data")
   ## Extract the phased parental haplotypes fom the family data table
   parentalHaps <- famTab[famTab$Relation!="child",]
   haps <- read.table(text=parentalHaps$Gl.String,sep="+",colClasses = "character")
+  
+  ##v0.3 incorporating truncation, and notation in output files
+  if(trunc > 0) {haps <- trimAlleles(haps,trunc)
+      famData <- gsub(".csv",paste("_",trunc,"-field.csv",sep=""),famData,fixed=TRUE)
+    }
 
   ## v0.2 incorporating extractLoci()
   locDetails <- extractLoci(haps) # v0.2
@@ -147,7 +156,7 @@ LDWrap <- function(famData,threshold=10,phased=TRUE,frameName="hla-family-data")
 #' @param verbose A boolean identifying if results should be printed to the console (verbose = TRUE), or returned in a vector of (\eqn{D'}, \eqn{Wn}, \eqn{WLocus2/Locus1}, \eqn{WLocus1/Locus2}, number of haplotypes) (verbose = FALSE)
 #' @param reportVector A boolean identifying if the vector of all haplotypes should be exported as a text file (reportVector = TRUE), or not (reportVector = FALSE). 
 #' @param vectorName A name for the exported haplotype vector file ; this name is not used if reportVector = False. If a name is unspecified, then a filename including the locus-pair and a timestamp is generated.
-#' @param vectorPrefix An optional prefix for the haplotpe vector to be used if reportVector = TRUE. This prefix will be appended, along with the phase status, before the locus name and timestamp.  
+#' @param vectorPrefix An optional prefix for the haplotpe vector to be used if reportVector = TRUE. This prefix will be appended, along with the phase status, before the locus name and timestamp. LDWrap() uses this parameter to identify the dataset and haplotype information passed to cALD().
 #' @keywords cALD ALD asymmetric conditional
 #' @return A vector of \eqn{D'}, \eqn{Wn}, \eqn{WLocus2/Locus1}, \eqn{WLocus1/Locus2} values, and the number of haplotypes evaluated
 #' @references Thomson G. & Single R.M. GENETICS 2014;198(1):321-31. https://doi.org/10.1534/genetics.114.165266

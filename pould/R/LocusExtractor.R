@@ -12,6 +12,7 @@
 #' @note This function is for internal POULD use only.
 #' @return List of two vector elements; the locus prefix (if any), e.g. "HLA-", and the interleaved unsuffixed and suffixed locus names (e.g., locus, locus_1)
 #' @keywords extractLocus
+#' @export
 #' @examples #
 
  extractLoci <- function(dataSet){

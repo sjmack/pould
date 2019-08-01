@@ -5,7 +5,7 @@
 \title{Parser for CSV-formatted 17th IHIW Family HLA Haplotype Data}
 \usage{
 LDWrap(famData, threshold = 10, phased = TRUE,
-  frameName = "hla-family-data")
+  frameName = "hla-family-data", trunc = 0)
 }
 \arguments{
 \item{famData}{A data frame or CSV formatted file that contains the two columns named "Gl String" and "Relation". Other columns can be included (in any order), but will not impact the analysis. The Relation column can contain any data; however anything other than "Relation=child" will be included in the LD analyses. The Gl String column should consist of two tilde (~) delimited HLA haplotypes conneced by a plus (+) sign (GL String format). The name of this file will serve as the basis for the name of the LD result files.}
@@ -15,6 +15,8 @@ LDWrap(famData, threshold = 10, phased = TRUE,
 \item{phased}{A boolean that determines if the LD calculations should be performed for phased data (TRUE) or unphased data (FALSE). If phased=FALSE, the EM algorithm is used to estimate haplotypes for the data in the Gl String column.}
 
 \item{frameName}{A descriptor for the data frame of family data provided. Defaults to "hla-family-data". This value is not used if a CSV file is provided.}
+
+\item{trunc}{An integer that specifies the number of fields to which colon-delimited allele names in famdData should be truncated. The default value of 0 indicates no truncation. A value higher than the number of fields in the supplied allele data will result in no truncation. When a positive value of trunc is provided, the names of the output files will include the specified truncation level.}
 }
 \description{
 A wrapper for parsing 17th International HLA and Immunogenetics Workshop Family Data files containing phased two-locus classical HLA locus haplotype data recorded in GL String format. Extracts all pairs of loci from GL String formatted haplotypes, and passes paired-genotype data to the cALD function.
@@ -27,11 +29,13 @@ This function attemtps to peform these LD calculations for all pairs of the clas
 
 When at least one locus in a locus pair is monomorphic, no LD calculations will be performed, and column 5 of the results for that locus pair will identify the monomorphic loci.
 
-This function requires HLA allele names that include complete locus prefixes (e.g., “HLA-A”, “HLA-DRB3"); LDWrap() parses these prefixes to identify each locus, but does not perform any additional parsing or validation of HLA allele names. Unusual allele names (e.g., `HLA-A*NULL`, `HLA-DRB1*NoMatch`, `HLA-DPB1*NT`) and truncated versions of allele names (e.g., `HLA-A*01`, `HLA-A*01:01`, `HLA-A*01:01:01`, etc.) will be analyzed as distinct alleles. Including unusual allele names or different truncated versions of the same allele name in a dataset will likely skew the analytic results.
+This function requires HLA allele names that include complete locus prefixes (e.g., “HLA-A”, “HLA-DRB3"); LDWrap() parses these prefixes to identify each locus, but does not perform any additional parsing or validation of HLA allele names. Unusual allele names (e.g., `HLA-A*NULL`, `HLA-DRB1*NoMatch`, `HLA-DPB1*NT`) and truncated versions of allele names (e.g., `HLA-A*01`, `HLA-A*01:01`, `HLA-A*01:01:01`, etc.) will be analyzed as distinct alleles. Including unusual allele names or different truncated versions of the same allele name in a dataset will likely skew the analytic results. In the latter case, the trunc parameter can be used to specify analysis at a specific number of fields.
 }
 \examples{
 # Analyze the included example data
 LDWrap(hla.hap.demo,frameName="HLADemo") 
+# Analyze the includeed example data with all alleles truncated to one field
+# LDWrap(hla.hap.demo,frameName="HLADemoTrunc",trunc=1) 
 }
 \references{
 Osoegawa et al. Hum Immunol. 2019 (https://doi.org/10.1016/j.humimm.2019.01.010)

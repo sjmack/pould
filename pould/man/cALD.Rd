@@ -18,7 +18,7 @@ cALD(dataSet, inPhase = FALSE, verbose = TRUE, reportVector = FALSE,
 
 \item{vectorName}{A name for the exported haplotype vector file ; this name is not used if reportVector = False. If a name is unspecified, then a filename including the locus-pair and a timestamp is generated.}
 
-\item{vectorPrefix}{An optional prefix for the haplotpe vector to be used if reportVector = TRUE. This prefix will be appended, along with the phase status, before the locus name and timestamp.}
+\item{vectorPrefix}{An optional prefix for the haplotpe vector to be used if reportVector = TRUE. This prefix will be appended, along with the phase status, before the locus name and timestamp. LDWrap() uses this parameter to identify the dataset and haplotype information passed to cALD().}
 }
 \value{
 A vector of \eqn{D'}, \eqn{Wn}, \eqn{WLocus2/Locus1}, \eqn{WLocus1/Locus2} values, and the number of haplotypes evaluated
