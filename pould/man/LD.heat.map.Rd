@@ -35,7 +35,7 @@ LD.heat.map(phasedData="hla-family-data_Phased_LD_results.csv",unphasedLabel="")
 # LD.heat.map(phasedData="my_Phased_LD_results.csv",unphasedData="your_Phased_LD_results.csv")
 }
 \references{
-Osoegawa et al. Hum Immunol. 2019 https://doi.org/10.1016/j.humimm.2019.01.010
+Osoegawa et al. Hum Immunol. 2019 https://doi.org/10.1016/j.humimm.2019.05.018
 }
 \keyword{disequilibrium}
 \keyword{heat}

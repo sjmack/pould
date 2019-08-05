@@ -1,3 +1,7 @@
+Changes in version 0.9.1.9000 (2019-08-01)
+   o Removed notes regarding gap::LDkl() from ReadMe and Vignette documents.
+   o Updated documentation for LDWrap() to reflect current data requirements. 
+
 Changes in version 0.9.0.9000 (2019-07-26)
    o Added the trimAlleles() function to LDWrap() to enable the truncation of
      colon-delimited allele names to a specified number of fields.

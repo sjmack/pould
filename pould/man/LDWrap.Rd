@@ -2,13 +2,13 @@
 % Please edit documentation in R/cALD_FamilyFunctions.R
 \name{LDWrap}
 \alias{LDWrap}
-\title{Parser for CSV-formatted 17th IHIW Family HLA Haplotype Data}
+\title{Parser for CSV-formatted GL String Haplotype Data}
 \usage{
 LDWrap(famData, threshold = 10, phased = TRUE,
   frameName = "hla-family-data", trunc = 0)
 }
 \arguments{
-\item{famData}{A data frame or CSV formatted file that contains the two columns named "Gl String" and "Relation". Other columns can be included (in any order), but will not impact the analysis. The Relation column can contain any data; however anything other than "Relation=child" will be included in the LD analyses. The Gl String column should consist of two tilde (~) delimited HLA haplotypes conneced by a plus (+) sign (GL String format). The name of this file will serve as the basis for the name of the LD result files.}
+\item{famData}{A data frame or CSV formatted file that contains the two columns named "Gl String" and "Relation". Other columns can be included (in any order), but will not impact the analysis. The Relation column can contain any data; however anything other than "Relation=child" will be included in the LD analyses. The Gl String column should consist of two tilde (~) delimited haplotypes conneced by a plus (+) sign (GL String format). Allele names should be recorded using the LOCUS*VARIANT structure used for HLA and KIR alleles. A locus prefix (e.g., 'HLA-') is not required, but if a locus prefix is included, all allele names must include the same locus prefix. The name of this file will serve as the basis for the name of the LD result files.}
 
 \item{threshold}{An integer that specifies the minimnum number of subjects allowed for the analysis of a locus-pair. The default value is 10. If the number of subjects with haplotypes for a locus pair is less than the threshold, the *_LD_results.csv file will contain 'Not Calculated' 'Subject Threshold=##' 'Complete subjects=#' '.' in columns 2-5 for that locus pair, where ## is the set threshold and # is the number of subjects. Column 6 will be empty.}
 
@@ -19,17 +19,15 @@ LDWrap(famData, threshold = 10, phased = TRUE,
 \item{trunc}{An integer that specifies the number of fields to which colon-delimited allele names in famdData should be truncated. The default value of 0 indicates no truncation. A value higher than the number of fields in the supplied allele data will result in no truncation. When a positive value of trunc is provided, the names of the output files will include the specified truncation level.}
 }
 \description{
-A wrapper for parsing 17th International HLA and Immunogenetics Workshop Family Data files containing phased two-locus classical HLA locus haplotype data recorded in GL String format. Extracts all pairs of loci from GL String formatted haplotypes, and passes paired-genotype data to the cALD function.
+A wrapper for parsing phased haplotype data recorded in GL String format. Extracts all pairs of loci from GL String formatted haplotypes, and passes paired-genotype data to the cALD function.
 }
 \details{
 This function coerces cALD() to generate a haplotype vector file for each locus pair analyzed, and generates a single LD results file containing LD values for all locus pairs, along with the number of haplotypes tested, one locus pair per row. The LD results file will contain six columns ("Loc1~Loc2","D'","Wn","WLoc1/Loc2","WLoc2/Loc1","N_Haplotypes"), and will be named "<filename prefix>_<Phased/Unphased>_LD_results.csv".
 }
 \note{
-This function attemtps to peform these LD calculations for all pairs of the classical HLA loci -- HLA-A, -C, -B, -DRB1, -DRB3, -DRB4, -DRB5, -DQA1, -DQB1, -DPA1 and -DPB1. If a haplotype dataset does not include all of these loci, the *LD_results.csv file will include rows for locus pairs for which no data was avialable.
-
 When at least one locus in a locus pair is monomorphic, no LD calculations will be performed, and column 5 of the results for that locus pair will identify the monomorphic loci.
 
-This function requires HLA allele names that include complete locus prefixes (e.g., “HLA-A”, “HLA-DRB3"); LDWrap() parses these prefixes to identify each locus, but does not perform any additional parsing or validation of HLA allele names. Unusual allele names (e.g., `HLA-A*NULL`, `HLA-DRB1*NoMatch`, `HLA-DPB1*NT`) and truncated versions of allele names (e.g., `HLA-A*01`, `HLA-A*01:01`, `HLA-A*01:01:01`, etc.) will be analyzed as distinct alleles. Including unusual allele names or different truncated versions of the same allele name in a dataset will likely skew the analytic results. In the latter case, the trunc parameter can be used to specify analysis at a specific number of fields.
+This function does not validate HLA allele names. Unusual allele names (e.g., `HLA-A*NULL`, `HLA-DRB1*NoMatch`, `HLA-DPB1*NT`) and truncated versions of allele names (e.g., `HLA-A*01`, `HLA-A*01:01`, `HLA-A*01:01:01`, etc.) will be analyzed as distinct alleles. Including unusual allele names or different truncated versions of the same allele name in a dataset will likely skew the analytic results. In the latter case, the trunc parameter can be used to specify analysis at a specific number of fields.
 }
 \examples{
 # Analyze the included example data
@@ -38,7 +36,7 @@ LDWrap(hla.hap.demo,frameName="HLADemo")
 # LDWrap(hla.hap.demo,frameName="HLADemoTrunc",trunc=1) 
 }
 \references{
-Osoegawa et al. Hum Immunol. 2019 (https://doi.org/10.1016/j.humimm.2019.01.010)
+Osoegawa et al. Hum Immunol. 2019a (https://doi.org/10.1016/j.humimm.2019.01.010) & 2019b (https://doi.org/10.1016/j.humimm.2019.05.018).
 }
 \keyword{ldwrap}
 \keyword{ldwrapper}
