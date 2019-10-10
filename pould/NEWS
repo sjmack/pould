@@ -1,3 +1,16 @@
+Changes in version 0.10.1.9000 (2019-10-08)
+  o 2019-10-08
+  o Updated LDWrap() to accomodate tab-delimited text (.txt or .tsv) format files.
+
+Changes in version 0.10.0.9000 (2019-10-05)
+  o 2019-10-05
+  o Updated package DESCRIPTION.
+  o Updated LD.heat.map() to account for locus pairs with no LD values.
+  o Added the parseGenotypes() function to support column-formatted genotype data.
+  o Updated LDWrap() to incorporate parseGenotypes().
+  o Updated the citations to reflect recent publications.
+  o Updated the Vignette.
+
 Changes in version 0.9.1.9000 (2019-08-01)
    o Removed notes regarding gap::LDkl() from ReadMe and Vignette documents.
    o Updated documentation for LDWrap() to reflect current data requirements. 

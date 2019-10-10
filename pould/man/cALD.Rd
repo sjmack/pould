@@ -21,7 +21,7 @@ cALD(dataSet, inPhase = FALSE, verbose = TRUE, reportVector = FALSE,
 \item{vectorPrefix}{An optional prefix for the haplotpe vector to be used if reportVector = TRUE. This prefix will be appended, along with the phase status, before the locus name and timestamp. LDWrap() uses this parameter to identify the dataset and haplotype information passed to cALD().}
 }
 \value{
-A vector of \eqn{D'}, \eqn{Wn}, \eqn{WLocus2/Locus1}, \eqn{WLocus1/Locus2} values, and the number of haplotypes evaluated
+A vector of {D'}, {Wn}, {WLocus2/Locus1}, {WLocus1/Locus2} values, and the number of haplotypes evaluated
 }
 \description{
 Calculates \eqn{D'}, \eqn{Wn} (Cramer's V) and Thomson and Single's conditional asymmetric LD (\eqn{ALD}) measures for pairs of loci.
