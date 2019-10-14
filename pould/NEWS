@@ -1,3 +1,8 @@
+Changes in version 0.10.2.9000 (2019-10-14)
+  o 2019-10-14
+  o Updated LDWrap() and parseGenotypes() to reject single-locus genotype files.
+  o Additional updates to LDWrap() to support text files.
+
 Changes in version 0.10.1.9000 (2019-10-08)
   o 2019-10-08
   o Updated LDWrap() to accomodate tab-delimited text (.txt or .tsv) format files.

@@ -2,7 +2,7 @@
 Phased Or Unphased LD (pould)
 =============================
 
-v0.10.1.9000 (October 8, 2019)
+v0.10.2.9000 (October 14, 2019)
 
 The *pould* package calculates four linkage disequilibrium (LD)
 statistics – *D<sup>’</sup>*, *W<sub>n</sub>* and the two conditional
@@ -69,10 +69,10 @@ library("pould")
 data(drb1.dqb1.demo)
 cALD(drb1.dqb1.demo,inPhase=FALSE)
 #> Calculating D', Wn and conditional ALD for 53 unphased genotypes at the DRB1 and DQB1 loci.
-#> D' for DRB1~DQB1 haplotypes: 0.958463646957485 (0.9585) 
-#> Wn for DRB1~DQB1 haplotypes: 0.811184751130022 (0.8112) 
-#> Variation of DQB1 conditioned on DRB1 (WDQB1/DRB1) = 0.903300935598599 (0.9033)
-#> Variation of DRB1 conditioned on DQB1 (WDRB1/DQB1) = 0.778712698266372 (0.7787)
+#> D' for DRB1~DQB1 haplotypes: 0.958927677284657 (0.9589) 
+#> Wn for DRB1~DQB1 haplotypes: 0.811250971869644 (0.8113) 
+#> Variation of DQB1 conditioned on DRB1 (WDQB1/DRB1) = 0.904035614652607 (0.904)
+#> Variation of DRB1 conditioned on DQB1 (WDRB1/DQB1) = 0.778712696236412 (0.7787)
 
 cALD(drb1.dqb1.demo,inPhase=TRUE)
 #> Calculating D', Wn and conditional ALD for 106 phased genotypes at the DRB1 and DQB1 loci.

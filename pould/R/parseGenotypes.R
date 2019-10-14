@@ -1,5 +1,5 @@
-## parseGenotypes -- Steven J. Mack October 4-8, 2019
-## v0.1.0
+## parseGenotypes -- Steven J. Mack October 10, 2019
+## v0.2.0
 ## Accepts and converts 2-column/locus BIGDAWG/PyPop-formatted genotype data to the GL String format expected by LDWrap
 
 #' Reformat columnnar genotype data to GL String format
@@ -28,9 +28,11 @@ parseGenotypes <- function(dataset) {
   if("DISEASE" %in% colnames(dataset)) {
       dataset <- dataset[,!colnames(dataset) %in% "DISEASE"] }
   
-  if(ncol(dataset) %% 2 !=0 ) {return(cat("Odd number of locus columns (",ncol(dataset),"). Please review your dataset.\n",paste=""))}
+  if(ncol(dataset) %% 2 !=0 ) {return(cat("Odd number of locus columns (",ncol(dataset),"). Please review your dataset.\n",sep=""))}
   
   colnames(dataset) <- sub("\\_\\d","",colnames(dataset))
+
+  if(ncol(dataset) == 2) {return(cat("This dataset contains data for a single locus (",colnames(dataset)[1],"). LD analysis requires two loci.\n",sep=""))}
   
   if(!any(grepl("*",dataset,fixed=TRUE))) {dataset[] <- Map(paste,names(dataset),dataset,sep="*")}
   

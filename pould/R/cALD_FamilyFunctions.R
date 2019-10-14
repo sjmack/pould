@@ -1,5 +1,5 @@
 ### Caluclating LD for 17th WS Family Data
-### October 9, 2019 v0.6.0 -- Steven J. Mack
+### October 14, 2019 v0.6.12 -- Steven J. Mack
 ##-----------------------------------------------------------------------------------------------------------------------------------------##
 ## Wrapper for parsing 17th WS Family Data files with phased Haplotype data
 ## Parameters:
@@ -48,7 +48,7 @@ LDWrap <- function(famData,threshold=10,phased=TRUE,frameName="hla-family-data",
   } else {
           suffix <- tolower(substr(famData,nchar(famData)-2,nchar(famData)))
           if(suffix == "csv") {famTab <- read.table(famData,header=T,sep=",",colClasses = "character",stringsAsFactors = FALSE)}
-          if((suffix == "txt") || (suffix == "tsv")) {famTab <- read.table(famData,header=T,sep="\t",colClasses = "character", stringsAsFactors = FALSE)
+          if((suffix == "txt") || (suffix == "tsv")) {famTab <- read.table(famData,header=T,sep="\t",colClasses = "character", stringsAsFactors = FALSE,na.strings = "****",as.is = TRUE,check.names = FALSE)
                               famData <- gsub(".txt",".csv",famData,fixed=TRUE)       }
           if(!exists("famTab")) {return(cat("The file name",famData,"does not have a .csv or .txt suffix.\nPlease append .csv for comma-separated-values files, and .txt for tab-delimited-text files.\n"))}
           }
@@ -61,7 +61,7 @@ LDWrap <- function(famData,threshold=10,phased=TRUE,frameName="hla-family-data",
         } else { if("disease" %in% headers) { ## removing the BIGDAWG disease column
                   famTab <- famTab[,!headers %in% "disease"] }
                   famTab <- parseGenotypes(famTab) ## cross your fingers here
-                  doCalc <- TRUE
+                  if(!is.null(famTab)) { doCalc <- TRUE }
                   }
   
   if(doCalc) {
@@ -153,8 +153,7 @@ LDWrap <- function(famData,threshold=10,phased=TRUE,frameName="hla-family-data",
   write.table(reportTab,sub(".csv",paste("_",phaseStat,"_LD_results",".csv",sep=""),x = basename(famData),fixed=TRUE),append = FALSE,sep = ",",row.names = FALSE,quote=FALSE,col.names = TRUE)
 
   cat("LD Analysis Complete")
-  } else { cat(paste("LD Analysis Halted: Your ",if(dataFile){"file"}else{"data frame"}," does not contain the proper columns. ",if(!"Relation" %in% headers && !"Gl.String" %in% headers) {"The 'Relation' and 'Gl String' columns are missing."} else {if(!"Gl.String" %in% headers) {"The 'Gl String' column is missing."} else {"The 'Relation' column is missing."} },sep=""))}
-  
+  } else {if(!is.null(famTab)) { cat(paste("LD Analysis Halted: Your ",if(dataFile){"file"}else{"data frame"}," does not contain the proper columns. ",if(!"Relation" %in% headers && !"Gl.String" %in% headers) {"The 'Relation' and 'Gl String' columns are missing."} else {if(!"Gl.String" %in% headers) {"The 'Gl String' column is missing."} else {"The 'Relation' column is missing."} },sep=""))} }
   }
 
 ##--------------------------------------------------------------------------------------------------------------------------------------------------##
