@@ -1,5 +1,5 @@
 ## parseGenotypes -- Steven J. Mack October 10, 2019
-## v0.2.0
+## v0.3.0
 ## Accepts and converts 2-column/locus BIGDAWG/PyPop-formatted genotype data to the GL String format expected by LDWrap
 
 #' Reformat columnnar genotype data to GL String format
@@ -35,6 +35,13 @@ parseGenotypes <- function(dataset) {
   if(ncol(dataset) == 2) {return(cat("This dataset contains data for a single locus (",colnames(dataset)[1],"). LD analysis requires two loci.\n",sep=""))}
   
   if(!any(grepl("*",dataset,fixed=TRUE))) {dataset[] <- Map(paste,names(dataset),dataset,sep="*")}
+  
+  # V0.3 remove NAs that become locus*NA
+  blanks <- paste(colnames(dataset),NA,sep="*")
+  for(i in 1:ncol(dataset)) { 
+                  if(nrow(dataset[dataset[,i] == blanks[i],][i]) != 0 ) {
+                                dataset[dataset[,i] == blanks[i],][i] <- NA }
+              }
   
   hap <-vector("list",2)   # paste together haplotypes & clean up stragglers
   for(x in FALSE:TRUE) { hap[[((1*x)+1)]] <- apply(dataset[,rep(c(TRUE,FALSE),(ncol(dataset)/2))==x],1,paste,collapse="~") 

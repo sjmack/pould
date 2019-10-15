@@ -12,7 +12,7 @@ LDWrap(famData, threshold = 10, phased = TRUE,
 
 \item{threshold}{An integer that specifies the minimnum number of subjects allowed for the analysis of a locus-pair. The default value is 10. If the number of subjects with haplotypes for a locus pair is less than the threshold, the *_LD_results.csv file will contain 'Not Calculated' 'Subject Threshold=##' 'Complete subjects=#' '.' in columns 2-5 for that locus pair, where ## is the set threshold and # is the number of subjects. Column 6 will be empty.}
 
-\item{phased}{A boolean that determines if the LD calculations should be performed for phased data (TRUE) or unphased data (FALSE). If phased=FALSE, the EM algorithm is used to estimate haplotypes for the data in the Gl String column.}
+\item{phased}{A boolean that determines if the LD calculations should be performed for phased data (TRUE) or unphased data (FALSE). If phased=FALSE, the EM algorithm is used to estimate haplotypes for the data in the Gl String column of family haplotype datasets.}
 
 \item{frameName}{A descriptor for the data frame of family data provided. Defaults to "hla-family-data". This value is not used if a CSV file is provided.}
 
@@ -28,6 +28,8 @@ This function coerces cALD() to generate a haplotype vector file for each locus 
 When at least one locus in a locus pair is monomorphic, no LD calculations will be performed, and column 5 of the results for that locus pair will identify the monomorphic loci.
 
 This function does not validate HLA allele names. Unusual allele names (e.g., `HLA-A*NULL`, `HLA-DRB1*NoMatch`, `HLA-DPB1*NT`) and truncated versions of allele names (e.g., `HLA-A*01`, `HLA-A*01:01`, `HLA-A*01:01:01`, etc.) will be analyzed as distinct alleles. Including unusual allele names or different truncated versions of the same allele name in a dataset will likely skew the analytic results. In the latter case, the trunc parameter can be used to specify analysis at a specific number of fields.
+
+Column-formatted genotype data are generally unphased; unless genotype data have been structured so that all alleles in the first column for each locus are in one haplotype, and all of the alleles in the second column in each locus are in the other haplotype, phased should be set to FALSE for column-formatted genotype datasets.
 }
 \examples{
 # Analyze the included example haplotype data
@@ -38,7 +40,9 @@ LDWrap(hla.hap.demo,frameName="HLADemo")
 # LDWrap(drb1.dqb1.demo,frameName="HLAGenotypeDemo")
 }
 \references{
-Osoegawa et al. Hum Immunol. 2019;80(9):633 (https://doi.org/10.1016/j.humimm.2019.01.010) & Osoegawa et al. Hum Immunol. 2019;80(9):644 (https://doi.org/10.1016/j.humimm.2019.05.018).
+Osoegawa et al. Hum Immunol. 2019;80(9):633 (https://doi.org/10.1016/j.humimm.2019.01.010)
+
+Osoegawa et al. Hum Immunol. 2019;80(9):644 (https://doi.org/10.1016/j.humimm.2019.05.018)
 }
 \keyword{ldwrap}
 \keyword{ldwrapper}

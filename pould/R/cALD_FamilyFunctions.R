@@ -1,5 +1,5 @@
 ### Caluclating LD for 17th WS Family Data
-### October 14, 2019 v0.6.12 -- Steven J. Mack
+### October 14, 2019 v0.6.3 -- Steven J. Mack
 ##-----------------------------------------------------------------------------------------------------------------------------------------##
 ## Wrapper for parsing 17th WS Family Data files with phased Haplotype data
 ## Parameters:
@@ -18,12 +18,13 @@
 #' This function coerces cALD() to generate a haplotype vector file for each locus pair analyzed, and generates a single LD results file containing LD values for all locus pairs, along with the number of haplotypes tested, one locus pair per row. The LD results file will contain six columns ("Loc1~Loc2","D'","Wn","WLoc1/Loc2","WLoc2/Loc1","N_Haplotypes"), and will be named "<filename prefix>_<Phased/Unphased>_LD_results.csv".
 #' @param famData A data frame or CSV formatted file (with a .csv filename suffix) that contains the two columns named "Gl String" and "Relation". Other columns can be included (in any order), but will not impact the analysis. The Relation column can contain any data; however anything other than "Relation=child" will be included in the LD analyses. The Gl String column should consist of two tilde (~) delimited haplotypes conneced by a plus (+) sign (GL String format). Allele names should be recorded using the LOCUS*VARIANT structure used for HLA and KIR alleles. A locus prefix (e.g., 'HLA-') is not required, but if a locus prefix is included, all allele names must include the same locus prefix. Alternatively, LDWrap() will consume genotype data in a data frame or headered tab-delimited text file (TXT or TSV), with two columns per locus. See the parseGenotype() documentation for additional requirements. The name of the file provided will serve as the basis for the name of the LD result files.
 #' @param threshold An integer that specifies the minimnum number of subjects allowed for the analysis of a locus-pair. The default value is 10. If the number of subjects with haplotypes for a locus pair is less than the threshold, the *_LD_results.csv file will contain 'Not Calculated' 'Subject Threshold=##' 'Complete subjects=#' '.' in columns 2-5 for that locus pair, where ## is the set threshold and # is the number of subjects. Column 6 will be empty.
-#' @param phased A boolean that determines if the LD calculations should be performed for phased data (TRUE) or unphased data (FALSE). If phased=FALSE, the EM algorithm is used to estimate haplotypes for the data in the Gl String column.
+#' @param phased A boolean that determines if the LD calculations should be performed for phased data (TRUE) or unphased data (FALSE). If phased=FALSE, the EM algorithm is used to estimate haplotypes for the data in the Gl String column of family haplotype datasets.
 #' @param frameName A descriptor for the data frame of family data provided. Defaults to "hla-family-data". This value is not used if a CSV file is provided. 
 #' @param trunc An integer that specifies the number of fields to which colon-delimited allele names in famdData should be truncated. The default value of 0 indicates no truncation. A value higher than the number of fields in the supplied allele data will result in no truncation. When a positive value of trunc is provided, the names of the output files will include the specified truncation level.  
 #' @keywords ldwrap ldwrapper wrapper
 #' @note When at least one locus in a locus pair is monomorphic, no LD calculations will be performed, and column 5 of the results for that locus pair will identify the monomorphic loci.
 #' @note This function does not validate HLA allele names. Unusual allele names (e.g., `HLA-A*NULL`, `HLA-DRB1*NoMatch`, `HLA-DPB1*NT`) and truncated versions of allele names (e.g., `HLA-A*01`, `HLA-A*01:01`, `HLA-A*01:01:01`, etc.) will be analyzed as distinct alleles. Including unusual allele names or different truncated versions of the same allele name in a dataset will likely skew the analytic results. In the latter case, the trunc parameter can be used to specify analysis at a specific number of fields.
+#' @note Column-formatted genotype data are generally unphased; unless genotype data have been structured so that all alleles in the first column for each locus are in one haplotype, and all of the alleles in the second column in each locus are in the other haplotype, phased should be set to FALSE for column-formatted genotype datasets.
 #' @export
 #' @examples 
 #' # Analyze the included example haplotype data
@@ -32,7 +33,8 @@
 #' # LDWrap(hla.hap.demo,frameName="HLADemoTrunc",trunc=1) 
 #' # Analyze the included example genotyope data
 #' # LDWrap(drb1.dqb1.demo,frameName="HLAGenotypeDemo")
-#' @references Osoegawa et al. Hum Immunol. 2019;80(9):633 (https://doi.org/10.1016/j.humimm.2019.01.010) & Osoegawa et al. Hum Immunol. 2019;80(9):644 (https://doi.org/10.1016/j.humimm.2019.05.018).
+#' @references Osoegawa et al. Hum Immunol. 2019;80(9):633 (https://doi.org/10.1016/j.humimm.2019.01.010)
+#' @references Osoegawa et al. Hum Immunol. 2019;80(9):644 (https://doi.org/10.1016/j.humimm.2019.05.018)
 
 LDWrap <- function(famData,threshold=10,phased=TRUE,frameName="hla-family-data",trunc=0){
   #library(haplo.stats)
@@ -48,7 +50,7 @@ LDWrap <- function(famData,threshold=10,phased=TRUE,frameName="hla-family-data",
   } else {
           suffix <- tolower(substr(famData,nchar(famData)-2,nchar(famData)))
           if(suffix == "csv") {famTab <- read.table(famData,header=T,sep=",",colClasses = "character",stringsAsFactors = FALSE)}
-          if((suffix == "txt") || (suffix == "tsv")) {famTab <- read.table(famData,header=T,sep="\t",colClasses = "character", stringsAsFactors = FALSE,na.strings = "****",as.is = TRUE,check.names = FALSE)
+          if(suffix %in% c("txt","tsv")) {famTab <- read.table(famData,header=T,sep="\t",colClasses = "character", stringsAsFactors = FALSE,na.strings = "****",as.is = TRUE,check.names = FALSE)
                               famData <- gsub(".txt",".csv",famData,fixed=TRUE)       }
           if(!exists("famTab")) {return(cat("The file name",famData,"does not have a .csv or .txt suffix.\nPlease append .csv for comma-separated-values files, and .txt for tab-delimited-text files.\n"))}
           }
@@ -58,8 +60,9 @@ LDWrap <- function(famData,threshold=10,phased=TRUE,frameName="hla-family-data",
                   ## Check to see if the family data table has the right columns
     if ("Relation" %in% headers && "Gl.String" %in% headers) { 
         doCalc <- TRUE
-        } else { if("disease" %in% headers) { ## removing the BIGDAWG disease column
-                  famTab <- famTab[,!headers %in% "disease"] }
+        } else { 
+                 #if("disease" %in% headers) { ## removing the BIGDAWG disease column
+                 # famTab <- famTab[,!headers %in% "disease"] }
                   famTab <- parseGenotypes(famTab) ## cross your fingers here
                   if(!is.null(famTab)) { doCalc <- TRUE }
                   }
