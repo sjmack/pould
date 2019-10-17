@@ -1,3 +1,7 @@
+Changes in version 0.10.4.9000 (2019-10-17)
+  o 2019-10-17
+  o Updated the vignette to include recommendations on locus order.
+
 Changes in version 0.10.3.9000 (2019-10-15)
   o 2019-10-15
   o Updated LDWrap() and parseGenotypes() to to streamline parsing and processing of 'untyped data'.

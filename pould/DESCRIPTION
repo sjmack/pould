@@ -1,6 +1,6 @@
 Package: pould
 Title: Phased or Unphased Linkage Disequilibrium
-Version: 0.10.3.9000
+Version: 0.10.4.9000
 Authors@R: person("Steven", "Mack", email = "sjmack@chori.org", role = c("aut", "cre"))
 Description: Computes the D', Wn, and conditional ALD measures pairs of genetic loci. Performs these LD calculations on phased genotype data recorded using GL String or columnar formats. Alternatively, generates Expectation-Maximization estimated haplotypes from phased data, or performs LD calculations on EM estimated haplotypes. Perfoms sign tests comparing LD values for phased and unphased datasets, and generates heat-maps for each LD measure. Described by Osoegawa et al. (2019a) [https://doi.org/10.1016/j.humimm.2019.01.010], and Osoegawa et. al. (2019b) [https://doi.org/10.1016/j.humimm.2019.05.018].
 Depends: R (>= 3.5.0)

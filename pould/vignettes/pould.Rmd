@@ -1,7 +1,7 @@
 ---
 title: "POULD: Phased Or Unphased Linkage Disequilibrium"
 author: "Steven J. Mack, PhD -- sjmack@chori.org"
-date: "October 15, 2019"
+date: "October 17, 2019"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using POULD}
@@ -11,7 +11,7 @@ vignette: >
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-* Package Version: 0.10.3.9000
+* Package Version: 0.10.4.9000
 
 # Overview
 
@@ -77,6 +77,9 @@ The "Gl String" column contains a [GL String](https://www.ncbi.nlm.nih.gov/pmc/a
 
 ##### Genotype Data
 A minimal *LDWrap()* genotype data file or data frame contains two columns per locus, with one allele in each column, as for *cALD()*, but accommodating more than two loci. Columns for the the same locus must be adjacent and can have identical names, or can be suffixed with "_1" and "_2". Columns named “SampleID" and "Disease" are permitted, but not required. No other columns are allowed. Allele names in each column can include a locus name (e.g., locus*allele); if locus names are not included, the locus name in the header will be associated with each allele in that column.
+
+##### Locus Order
+The order in which the loci appear, either in columns or in the GL String haplotype, affects the identification of haplotype locus pairs for analysis. For example, if HLA loci are organized alphabetically, haplotypes of the HLA-B and HLA-C loci will be analyzed as B~C haplotypes; if they are organized by map order, those haplotypes will be analyzed as C~B haplotypes. B~C and C~B haplotypes will not be recognized as the same by *LD.heat.map()*. To avoid this, it is recommended to use the same organization of loci for all analyses, and to use map order for HLA or KIR loci. 
 
 ### LD.sign.test
 
