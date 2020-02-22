@@ -24,7 +24,7 @@ This data is formatted as example input for the LDWrap() function, but is not ac
 }
 \references{
 \itemize{
- \item{Published study: Mack et al. Genes Immun. 2018 doi: 10.1038/s41435-017-0006-8.}
+ \item{Published study: Mack et al. Genes Immun. 2019;20(4):308-326. doi: 10.1038/s41435-017-0006-8.}
  \item{GL String format: Milius et al. Tissue Antigens. 2013;82(2):106-12. doi: 10.1111/tan.12150.}
  }
 }

@@ -24,7 +24,7 @@ Genotype data for each locus is shown in two columns; the alleles in columns 1 a
 These genotypes were extracted from the hla.hap.demo dataset.
 }
 \references{
-Mack et al. Genes Immun. 2018 doi: 10.1038/s41435-017-0006-8.
+Mack et al. Genes Immun. 2019;20(4):308-326. doi: 10.1038/s41435-017-0006-8.
 }
 \keyword{data}
 \keyword{genotype}

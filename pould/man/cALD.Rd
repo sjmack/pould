@@ -4,8 +4,14 @@
 \alias{cALD}
 \title{Calculation of the \eqn{D'}, \eqn{Wn}, and conditional Asymmetric LD Measures}
 \usage{
-cALD(dataSet, inPhase = FALSE, verbose = TRUE, reportVector = FALSE,
-  vectorName = "", vectorPrefix = "")
+cALD(
+  dataSet,
+  inPhase = FALSE,
+  verbose = TRUE,
+  reportVector = FALSE,
+  vectorName = "",
+  vectorPrefix = ""
+)
 }
 \arguments{
 \item{dataSet}{A data frame or tab delimited file consisting of four columns of genotype data named, e.g. locus1_1 locus1_2 locus2_1 locus2_2, with 1 row per sample. The columns must be organized in this exact order, but the column names should not have _1 or _2 appended; use the same locus name for each column of a given locus. For phased data, locus1_1 is in phase with locus2_1, and locus1_2 is in phase with locus_2_2. Because this funciton operates on locus pairs, any rows with missing data should be excluded from the input genotype data.}

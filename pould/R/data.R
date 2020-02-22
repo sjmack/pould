@@ -16,7 +16,7 @@
 #'   \item{DQB1: the second of two two-field HLA-DRB1 alleles}
 #'   }
 #' @source immport.org study SDY1045 doi:10.21430/M3QW34U2SG
-#' @references Mack et al. Genes Immun. 2018 doi: 10.1038/s41435-017-0006-8. 
+#' @references Mack et al. Genes Immun. 2019;20(4):308-326. doi: 10.1038/s41435-017-0006-8. 
 "drb1.dqb1.demo"
 
 #' Example Six-Locus HLA Haplotype Data in GL String Format
@@ -36,7 +36,7 @@
 #' @source immport.org study SDY1045 doi:10.21430/M3QW34U2SG
 #' @references 
 #' \itemize{
-#'  \item{Published study: Mack et al. Genes Immun. 2018 doi: 10.1038/s41435-017-0006-8.}
+#'  \item{Published study: Mack et al. Genes Immun. 2019;20(4):308-326. doi: 10.1038/s41435-017-0006-8.}
 #'  \item{GL String format: Milius et al. Tissue Antigens. 2013;82(2):106-12. doi: 10.1111/tan.12150.}
 #'  }
 "hla.hap.demo"

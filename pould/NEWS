@@ -1,3 +1,7 @@
+Changes in version 0.10.5.9000 (2020-02-21)
+  o 2020-02-21
+  o Changes to documentation in advance of CRAN submission.
+
 Changes in version 0.10.4.9000 (2019-10-17)
   o 2019-10-17
   o Updated the vignette to include recommendations on locus order.

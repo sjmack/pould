@@ -1,17 +1,17 @@
 ---
-title: "POULD: Phased Or Unphased Linkage Disequilibrium"
-author: "Steven J. Mack, PhD -- sjmack@chori.org"
-date: "October 17, 2019"
+title: "pould: Phased Or Unphased Linkage Disequilibrium"
+author: "Steven J. Mack, PhD -- steven.mack@ucsf.edu"
+date: "February 21, 2020"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using POULD}
+  %\VignetteIndexEntry{Using pould}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-* Package Version: 0.10.4.9000
+* Package Version: 0.10.5.9000
 
 # Overview
 

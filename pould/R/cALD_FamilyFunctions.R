@@ -28,7 +28,7 @@
 #' @export
 #' @examples 
 #' # Analyze the included example haplotype data
-#' LDWrap(hla.hap.demo,frameName="HLADemo") 
+#' # LDWrap(hla.hap.demo,frameName="HLADemo") 
 #' # Analyze the includeed example data with all alleles truncated to one field
 #' # LDWrap(hla.hap.demo,frameName="HLADemoTrunc",trunc=1) 
 #' # Analyze the included example genotyope data

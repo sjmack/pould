@@ -4,8 +4,13 @@
 \alias{LDWrap}
 \title{Parser for CSV-formatted GL String Haplotype Data}
 \usage{
-LDWrap(famData, threshold = 10, phased = TRUE,
-  frameName = "hla-family-data", trunc = 0)
+LDWrap(
+  famData,
+  threshold = 10,
+  phased = TRUE,
+  frameName = "hla-family-data",
+  trunc = 0
+)
 }
 \arguments{
 \item{famData}{A data frame or CSV formatted file (with a .csv filename suffix) that contains the two columns named "Gl String" and "Relation". Other columns can be included (in any order), but will not impact the analysis. The Relation column can contain any data; however anything other than "Relation=child" will be included in the LD analyses. The Gl String column should consist of two tilde (~) delimited haplotypes conneced by a plus (+) sign (GL String format). Allele names should be recorded using the LOCUS*VARIANT structure used for HLA and KIR alleles. A locus prefix (e.g., 'HLA-') is not required, but if a locus prefix is included, all allele names must include the same locus prefix. Alternatively, LDWrap() will consume genotype data in a data frame or headered tab-delimited text file (TXT or TSV), with two columns per locus. See the parseGenotype() documentation for additional requirements. The name of the file provided will serve as the basis for the name of the LD result files.}
@@ -33,7 +38,7 @@ Column-formatted genotype data are generally unphased; unless genotype data have
 }
 \examples{
 # Analyze the included example haplotype data
-LDWrap(hla.hap.demo,frameName="HLADemo") 
+# LDWrap(hla.hap.demo,frameName="HLADemo") 
 # Analyze the includeed example data with all alleles truncated to one field
 # LDWrap(hla.hap.demo,frameName="HLADemoTrunc",trunc=1) 
 # Analyze the included example genotyope data
