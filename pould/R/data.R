@@ -1,6 +1,6 @@
 #' Example HLA Genotype Data for DRB1 and DQB1
 #' 
-#' A data frame of phased two-field HLA-DRB1 and HLA-DQB1 genotypes for 419 European American Control Sbbjects included
+#' A data frame of phased two-field HLA-DRB1 and HLA-DQB1 genotypes for 419 European American control subjects included
 #' in a study of Multiple Sclerosis.
 #' Genotype data for each locus is shown in two columns; the alleles in columns 1 and 2 are phased with the alleles in columns 3 and 4, respectively.
 #' These genotypes were extracted from the hla.hap.demo dataset.  
@@ -22,7 +22,7 @@
 #' Example Six-Locus HLA Haplotype Data in GL String Format
 #' 
 #' A data frame of experimentally phased genotype data for the HLA-A, -C, -B, -DRB1, -DQB1 and DQB1 loci. These haplotypes are
-#' for 419 unrelated European American Control Subjects included in a study of Multiple Sclerosis. These haplotypes were experimentally phased using the EM algorithm; low-frequency haplotypes (with counts < 3) are assigned stochasically by the EM method, so the phase "quality" of these haplotypes should be considered lower than that for haplotypes determined via family segregation analysis.
+#' for 419 unrelated European American control subjects included in a study of Multiple Sclerosis. These haplotypes were experimentally phased using the EM algorithm; low-frequency haplotypes (with counts < 3) are assigned stochasically by the EM method, so the phase "quality" of these haplotypes should be considered lower than that for haplotypes determined via family segregation analysis.
 #' @note This data is formatted as example input for the LDWrap() function, but is not actual family data. Actual family data would include 'mother', 'father' and 'child' in the "Relation" field. Nevertheless, including 'Subject' in this field is sufficient for analysis using LDWrap(). 
 #' @docType data
 #' @keywords hla haplotype data

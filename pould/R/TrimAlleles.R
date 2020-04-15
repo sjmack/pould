@@ -1,11 +1,11 @@
-## TrimAlleles -- Steven J. Mack July 12-25, 2019 v0.1
+## TrimAlleles -- Steven J. Mack April 10, 2020 v1.0
 ## Trims IPD-IMGT/KIR allele names to a specified number of fields using BIGDAWG::GetField()
 
 #' Truncate allele names in haplotypes to the specified number of fields.
 #' 
 #' This function accepts a dataframe of tilde-delimited haplotypes and trims colon-delimited names to the number of fields specified by 'reso'. 
 #' @param haplotypes Data frame of tilde-delimited haplotypes extracted from the famData provided to LDWrap()
-#' @param reso An integer that specifies the number of fields to which colon-delimited allele names in famdData should be truncated. The default value of 0 indicates no truncation. A value higher than the number of fields in the supplied allele data will result in no truncation.
+#' @param reso An integer that specifies the number of fields to which colon-delimited allele names in famData should be truncated. The default value of 0 indicates no truncation. A value higher than the number of fields in the supplied allele data will result in no truncation.
 #' @note This function is for internal POULD use only.
 #' @return A data frame of two sets of tilde-delimited haplotypes. 
 #' @keywords trimAllele

@@ -4,7 +4,7 @@
 \alias{writeVector}
 \title{Exporting Haplotype Vectors}
 \usage{
-writeVector(nLoc1, Res, hapVec, numSamp, writeName, genPhase, Prefix)
+writeVector(nLoc1, Res, hapVec, numSamp, writeName, genPhase, Prefix, vDir)
 }
 \arguments{
 \item{nLoc1}{Number of alleles at locus 1}
@@ -20,6 +20,8 @@ writeVector(nLoc1, Res, hapVec, numSamp, writeName, genPhase, Prefix)
 \item{genPhase}{Boolean describing phased (TRUE) or unphased (FALSE) analysis}
 
 \item{Prefix}{The specified prefix for the written vector file}
+
+\item{vDir}{The directory into which the vector file should be written.}
 }
 \description{
 This function writes the haplotype vector and any accessory information to a text file.

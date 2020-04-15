@@ -1,3 +1,11 @@
+Changes in version 1.0.0 (2020-04-10)
+  o 2020-04-10
+  o Included options for users to specify the directory into which files should be written for 
+    cALD(), LD.heat.map(), LD.sign.test() and LDwrap().
+  o Changed cat() messages to warning messages() in LD.heat.map(), LD.sign.test() and LDWrap().
+  o Renamed the reportVector parameter in cALD to saveVector.
+  o Submission to CRAN.
+
 Changes in version 0.10.5.9000 (2020-02-21)
   o 2020-02-21
   o Changes to documentation in advance of CRAN submission.

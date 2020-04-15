@@ -1,5 +1,5 @@
-## parseGenotypes -- Steven J. Mack October 10, 2019
-## v0.3.0
+## parseGenotypes -- Steven J. Mack April 10, 2020
+## v1.00
 ## Accepts and converts 2-column/locus BIGDAWG/PyPop-formatted genotype data to the GL String format expected by LDWrap
 
 #' Reformat columnnar genotype data to GL String format

@@ -8,9 +8,10 @@ cALD(
   dataSet,
   inPhase = FALSE,
   verbose = TRUE,
-  reportVector = FALSE,
+  saveVector = FALSE,
   vectorName = "",
-  vectorPrefix = ""
+  vectorPrefix = "",
+  vecDir = tempdir()
 )
 }
 \arguments{
@@ -20,11 +21,13 @@ cALD(
 
 \item{verbose}{A boolean identifying if results should be printed to the console (verbose = TRUE), or returned in a vector of (\eqn{D'}, \eqn{Wn}, \eqn{WLocus2/Locus1}, \eqn{WLocus1/Locus2}, number of haplotypes) (verbose = FALSE)}
 
-\item{reportVector}{A boolean identifying if the vector of all haplotypes should be exported as a text file (reportVector = TRUE), or not (reportVector = FALSE).}
+\item{saveVector}{A boolean identifying if the vector of all haplotypes should be exported as a text file (saveVector = TRUE), or not (saveVector = FALSE).}
 
-\item{vectorName}{A name for the exported haplotype vector file ; this name is not used if reportVector = False. If a name is unspecified, then a filename including the locus-pair and a timestamp is generated.}
+\item{vectorName}{A name for the exported haplotype vector file; this name is not used if saveVector = FALSE. If a name is unspecified, then a filename including the locus-pair and a timestamp is generated.}
 
-\item{vectorPrefix}{An optional prefix for the haplotpe vector to be used if reportVector = TRUE. This prefix will be appended, along with the phase status, before the locus name and timestamp. LDWrap() uses this parameter to identify the dataset and haplotype information passed to cALD().}
+\item{vectorPrefix}{An optional prefix for the haplotpe vector to be used if saveVector = TRUE. This prefix will be appended, along with the phase status, before the locus name and timestamp. LDWrap() uses this parameter to identify the dataset and haplotype information passed to cALD().}
+
+\item{vecDir}{The directory into which the haplotype vector should be written if saveVector = TRUE. The default is the directory specified by tempdir().}
 }
 \value{
 A vector of {D'}, {Wn}, {WLocus2/Locus1}, {WLocus1/Locus2} values, and the number of haplotypes evaluated
@@ -37,10 +40,11 @@ LD results can be directed to the console or to a data file or data frame object
 The implementation of ALD applied here is calculated using individual \eqn{Dij} LD values and allele frequencies.
 }
 \examples{
-# Using the included HLA-DRB1 HLA-DQB1 genotype data to report LD results to the console
-cALD(drb1.dqb1.demo)
-# Alternatively returning a vector of LD results
-LDvec <- cALD(drb1.dqb1.demo,verbose=FALSE)
+# Analyze the first 10 rows of the included drb1.dqb1.demo genotype dataset
+# and report LD results to the console.
+cALD(drb1.dqb1.demo[1:10,])
+# Alternatively, return a vector of LD results.
+LDvec <- cALD(drb1.dqb1.demo[1:10,],verbose=FALSE)
 }
 \references{
 Thomson G. & Single R.M. GENETICS 2014;198(1):321-31. https://doi.org/10.1534/genetics.114.165266

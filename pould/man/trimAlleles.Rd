@@ -9,7 +9,7 @@ trimAlleles(haplotypes, reso)
 \arguments{
 \item{haplotypes}{Data frame of tilde-delimited haplotypes extracted from the famData provided to LDWrap()}
 
-\item{reso}{An integer that specifies the number of fields to which colon-delimited allele names in famdData should be truncated. The default value of 0 indicates no truncation. A value higher than the number of fields in the supplied allele data will result in no truncation.}
+\item{reso}{An integer that specifies the number of fields to which colon-delimited allele names in famData should be truncated. The default value of 0 indicates no truncation. A value higher than the number of fields in the supplied allele data will result in no truncation.}
 }
 \value{
 A data frame of two sets of tilde-delimited haplotypes.

@@ -9,7 +9,8 @@ LDWrap(
   threshold = 10,
   phased = TRUE,
   frameName = "hla-family-data",
-  trunc = 0
+  trunc = 0,
+  writeTo = tempdir()
 )
 }
 \arguments{
@@ -19,9 +20,11 @@ LDWrap(
 
 \item{phased}{A boolean that determines if the LD calculations should be performed for phased data (TRUE) or unphased data (FALSE). If phased=FALSE, the EM algorithm is used to estimate haplotypes for the data in the Gl String column of family haplotype datasets.}
 
-\item{frameName}{A descriptor for the data frame of family data provided. Defaults to "hla-family-data". This value is not used if a CSV file is provided.}
+\item{frameName}{A descriptor for the data frame of family data provided. The default value is "hla-family-data". This value is not used if a CSV file is provided.}
 
 \item{trunc}{An integer that specifies the number of fields to which colon-delimited allele names in famdData should be truncated. The default value of 0 indicates no truncation. A value higher than the number of fields in the supplied allele data will result in no truncation. When a positive value of trunc is provided, the names of the output files will include the specified truncation level.}
+
+\item{writeTo}{The directory into which the LDWrap() output files should be written. The default is the directory specified by tempdir().}
 }
 \description{
 A wrapper for parsing phased haplotype data recorded in GL String format. Extracts all pairs of loci from GL String formatted haplotypes or column formatted genotypes, passes paired-genotype data to the cALD function, and generates files consumed by the LD.sign.test() and LD.heat.map() functions.
@@ -37,12 +40,10 @@ This function does not validate HLA allele names. Unusual allele names (e.g., `H
 Column-formatted genotype data are generally unphased; unless genotype data have been structured so that all alleles in the first column for each locus are in one haplotype, and all of the alleles in the second column in each locus are in the other haplotype, phased should be set to FALSE for column-formatted genotype datasets.
 }
 \examples{
-# Analyze the included example haplotype data
-# LDWrap(hla.hap.demo,frameName="HLADemo") 
-# Analyze the includeed example data with all alleles truncated to one field
-# LDWrap(hla.hap.demo,frameName="HLADemoTrunc",trunc=1) 
-# Analyze the included example genotyope data
-# LDWrap(drb1.dqb1.demo,frameName="HLAGenotypeDemo")
+# Analyze the first 10 rows of the drb1.dqb1.demo genotype dataset.
+LDWrap(drb1.dqb1.demo[1:10,],frameName="DRDQDemo")
+# Analyze the includeed example genotype data with all alleles truncated to one field.
+LDWrap(drb1.dqb1.demo[1:10,],frameName="DRDQDemoTrunc",trunc=1)
 }
 \references{
 Osoegawa et al. Hum Immunol. 2019;80(9):633 (https://doi.org/10.1016/j.humimm.2019.01.010)

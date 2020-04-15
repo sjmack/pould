@@ -4,13 +4,15 @@
 \name{drb1.dqb1.demo}
 \alias{drb1.dqb1.demo}
 \title{Example HLA Genotype Data for DRB1 and DQB1}
-\format{A data frame with 419 rows and four columns
+\format{
+A data frame with 419 rows and four columns
 \itemize{
   \item{DRB1: the first of two two-field HLA-DRB1 alleles}
   \item{DRB1: the second of two two-field HLA-DRB1 alleles}
   \item{DQB1: the first of two two-field HLA-DQB1 alleles}
   \item{DQB1: the second of two two-field HLA-DRB1 alleles}
-  }}
+  }
+}
 \source{
 immport.org study SDY1045 doi:10.21430/M3QW34U2SG
 }
@@ -18,7 +20,7 @@ immport.org study SDY1045 doi:10.21430/M3QW34U2SG
 data(drb1.dqb1.demo)
 }
 \description{
-A data frame of phased two-field HLA-DRB1 and HLA-DQB1 genotypes for 419 European American Control Sbbjects included
+A data frame of phased two-field HLA-DRB1 and HLA-DQB1 genotypes for 419 European American control subjects included
 in a study of Multiple Sclerosis.
 Genotype data for each locus is shown in two columns; the alleles in columns 1 and 2 are phased with the alleles in columns 3 and 4, respectively.
 These genotypes were extracted from the hla.hap.demo dataset.
