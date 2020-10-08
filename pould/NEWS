@@ -1,3 +1,7 @@
+Changes in version 1.0.1 (2020-10-08)
+  o 2020-10-08
+  o Resubmitted for unarchiving from CRAN.
+
 Changes in version 1.0.0 (2020-04-10)
   o 2020-04-10
   o Included options for users to specify the directory into which files should be written for 
