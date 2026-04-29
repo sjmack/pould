@@ -1,9 +1,8 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-Phased Or Unphased LD (pould)
-=============================
+# Phased Or Unphased LD (pould)
 
-v1.0.1 (October 8, 2020)
+v1.0.2 (April 28, 2020)
 
 The *pould* package calculates four linkage disequilibrium (LD)
 statistics – *D<sup>’</sup>*, *W<sub>n</sub>* and the two conditional
@@ -43,8 +42,7 @@ This warning does not impact the function of the package. Installing
 [Rtools v3.5](https://cran.r-project.org/bin/windows/Rtools/) will
 prevent these warnings.
 
-Example
--------
+## Example
 
 In addiiton to simply calculating LD values, *pould* can be used to
 compare LD for phased and unphased versions of the same dataset, e.g.,
@@ -59,7 +57,7 @@ algorithm is applied to estimate haplotypes. In the second application
 of *cALD()*, the original six-locus phasing information is retained.
 
 By comparing the resulting LD values, it becomes clear that LD is
-uniformly *lower* for the pre-phased DRB1\~DQB1 haplotypes than for the
+uniformly *lower* for the pre-phased DRB1~DQB1 haplotypes than for the
 *de novo* EM estimated haplotypes. This suggests that the EM algorithm
 may not be accurately estimating haplotypes low-frequency (counts \< 4)
 haplotypes for individual locus pairs during multi-locus haplotype
@@ -73,10 +71,10 @@ library("pould")
 data(drb1.dqb1.demo)
 cALD(drb1.dqb1.demo,inPhase=FALSE)
 #> Calculating D', Wn and conditional ALD for 53 unphased genotypes at the DRB1 and DQB1 loci.
-#> D' for DRB1~DQB1 haplotypes: 0.958463648286022 (0.9585) 
-#> Wn for DRB1~DQB1 haplotypes: 0.811184751666017 (0.8112) 
-#> Variation of DQB1 conditioned on DRB1 (WDQB1/DRB1) = 0.903300936956993 (0.9033)
-#> Variation of DRB1 conditioned on DQB1 (WDRB1/DQB1) = 0.778712698006812 (0.7787)
+#> D' for DRB1~DQB1 haplotypes: 0.958927669511949 (0.9589) 
+#> Wn for DRB1~DQB1 haplotypes: 0.811250968733994 (0.8113) 
+#> Variation of DQB1 conditioned on DRB1 (WDQB1/DRB1) = 0.904035606711622 (0.904)
+#> Variation of DRB1 conditioned on DQB1 (WDRB1/DQB1) = 0.77871269775499 (0.7787)
 
 cALD(drb1.dqb1.demo,inPhase=TRUE)
 #> Calculating D', Wn and conditional ALD for 106 phased genotypes at the DRB1 and DQB1 loci.
